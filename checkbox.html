@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>checkbox</title>
+
+        <style media="screen">
+            body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            font-size: 14px;
+            line-height: 20px;
+            }
+
+            /* checkboxes */
+
+            label {
+                  cursor: pointer;
+                display: inline-block;
+                position: relative;
+                padding-left: 25px; /* 10 px padding right + 15px input type*/
+                margin-right: 10px; /* margin between inputs types */
+            }
+
+            label:before {
+                content: "";
+                width: 15px;
+                height: 15px;
+                position: absolute;
+                left: 0;
+            }
+
+            input[type=checkbox] {
+                display: none;
+            }
+
+            .checkbox label:before {
+                background: url('http://i36.photobucket.com/albums/e22/lilsq3/checkbox_small.png') left center no-repeat;
+            margin-top: 2px;
+            }
+
+            input[type=checkbox]:checked + label:before {
+                background: url('http://i36.photobucket.com/albums/e22/lilsq3/checkbox_selected_small.png') left center no-repeat;
+            }
+
+
+
+            .class_checkbox {
+                width: 20px;
+                height: 20px;
+                background-color: red;
+            }
+            .class_checkbox.checked {
+                background-color: green;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="checkbox">
+            <input id="check1" type="checkbox" name="check" value="check1">
+            <label for="check1">Checkbox One</label>
+            <br>
+            <input id="check2" type="checkbox" name="check" value="check2">
+            <label for="check2">Checkbox Two</label>
+
+            <br><br>
+            <input type="checkbox" class="input_class_checkbox">
+        </div>
+    </body>
+
+    <script type="text/javascript">
+        $('.input_class_checkbox').each(function(){
+        $(this).hide().after('<div class="class_checkbox" />');
+
+        });
+
+        $('.class_checkbox').on('click',function(){
+        $(this).toggleClass('checked').prev().prop('checked',$(this).is('.checked'))
+        });
+    </script>
+</html>
