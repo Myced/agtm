@@ -10,7 +10,7 @@ include_once 'admin/classes/class.Product.php';
 $db = new dbc();
 $dbc = $db->get_instance();
 
-$loiStatus = Status::ACCEPTED;
+$loiStatus = Status::AVAILABLE;
 
 
 //save quotation request to the database
@@ -151,19 +151,19 @@ if(isset($_POST['quotation']))
                         <!-- end of col-md-2 to show the categories -->
 
                         <!-- columnt to show the soc for sa-->
-                        <div class="col-md-4">
+                        <div class="col-md-3">
 
                             <!-- a row for the latest confirm loi -->
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h3>
+                                    <h3 class="loi-heading">
                                         Latest Confirmed LOI for Purchase
                                     </h3>
 
                                     <div class="table-responsive">
                                         <table class="table table-home">
                                             <?php
-                                            $query = "SELECT * FROM `importers` WHERE `status`  = '$loiStatus' ORDER BY `id` DESC LIMIT 5";
+                                            $query = "SELECT * FROM `loi` WHERE `status`  = '$loiStatus' ORDER BY `id` DESC LIMIT 10";
                                             $result = mysqli_query($dbc, $query)
                                                 or die("Error. Could not get the SCOs");
 
@@ -176,8 +176,8 @@ if(isset($_POST['quotation']))
                                                     </td>
 
                                                     <td>
-                                                        <a href="#">
-                                                            <?php echo $row['product_name'] . ' To ' . $row['destination']; ?>
+                                                        <a href="loi_details.php?offer=<?php echo $row['id']; ?>">
+                                                            <?php echo $row['title']; ?>
                                                             <span>
                                                                 <i class="fa fa-lock"></i>
                                                             </span>
@@ -196,7 +196,7 @@ if(isset($_POST['quotation']))
                             <!-- a row for the latest sco for sales. -->
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h3>
+                                    <h3 class="loi-heading">
                                         Latest Confirmed SCO for sale
                                     </h3>
 
@@ -204,7 +204,7 @@ if(isset($_POST['quotation']))
                                         <table class="table table-home">
 
                                             <?php
-                                            $query = "SELECT * FROM `exporters` WHERE `status` = '$loiStatus' ORDER BY `id` DESC LIMIT 5";
+                                            $query = "SELECT * FROM `sco` WHERE `status` = '$loiStatus' ORDER BY `id` DESC LIMIT 5";
                                             $result = mysqli_query($dbc, $query)
                                                 or die("Error. Could not get the SCOs");
 
@@ -217,8 +217,8 @@ if(isset($_POST['quotation']))
                                                     </td>
 
                                                     <td>
-                                                        <a href="#">
-                                                            <?php echo $row['product_name'] . ' From ' . $row['origin']; ?>
+                                                        <a href="sco_details.php?offer=<?php echo $row['id']; ?>">
+                                                            <?php echo $row['title']; ?>
                                                             <span>
                                                                 <i class="fa fa-lock"></i>
                                                             </span>
@@ -241,11 +241,11 @@ if(isset($_POST['quotation']))
                         <!-- end of col-md-4 for the loi purchases and sco sales -->
 
                         <!-- next column buy and sell offers. -->
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <!-- a row for the latest confirm loi -->
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h3>
+                                    <h3 class="loi-heading">
                                         Latest Buy Offers
                                     </h3>
 
@@ -269,7 +269,7 @@ if(isset($_POST['quotation']))
                                                     <td>
                                                         <a href="buy_offer_details.php?offer=<?php echo $row['id']; ?>">
                                                             <?php echo $row['product_name']; ?>
-                                                             For Sale
+                                                             Needed
                                                         </a>
                                                     </td>
 
@@ -292,7 +292,7 @@ if(isset($_POST['quotation']))
                             <!-- a row for the latest sco for sales. -->
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h3>
+                                    <h3 class="loi-heading">
                                         Latest Sell Offers
                                     </h3>
 
@@ -315,8 +315,8 @@ if(isset($_POST['quotation']))
 
                                                     <td>
                                                         <a href="sell_offer_details.php?offer=<?php echo $row['id']; ?>">
-                                                            Buy
                                                             <?php echo $row['product_name']; ?>
+                                                            For Sale
                                                         </a>
                                                     </td>
 
@@ -333,6 +333,37 @@ if(isset($_POST['quotation']))
                             </div>
                             <!-- end of the row SCO for sale -->
                         </div>
+
+                        <!-- //next column for forum post  -->
+                        <div class="col-md-4">
+                            <div class="row">
+                                <h3 class="page-header">Forum Updates</h3>
+
+                                <div class="col-md-12">
+                                    <?php
+                                    $query = "SELECT * FROM `threads` ORDER BY `views` DESC LIMIT 2";
+                                    $result = $dbc->query($query);
+
+                                    while($row = $result->fetch_assoc())
+                                    {
+                                        ?>
+                                    <div class="callout">
+                                        <h5> <strong><?php echo $row['title']; ?></strong> </h5>
+                                        <p>
+                                            <?php
+                                            $text = nl2br(substr($row['description'], 0, 60));
+
+                                            echo $text;
+                                             ?> ...
+                                        </p>
+                                    </div>
+                                        <?php
+                                    }
+
+                                     ?>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- end of row for categories, confirm loi purchases and co  -->
 
@@ -341,10 +372,9 @@ if(isset($_POST['quotation']))
 
                         <!-- column to contain the market place, and requesting for quotation -->
                         <div class="col-md-3">
-                            <h2>Market<span class="text-pink">Place </span> </h2>
 
                             <!-- row for madis live -->
-                            
+
                             <!-- end of manis live -->
 
                             <!-- quotation -->
@@ -478,7 +508,9 @@ if(isset($_POST['quotation']))
 
                         <!-- advertisement space -->
                         <div class="col-md-3">
-
+                            <div class="row">
+                                <img src="" alt="">
+                            </div>
                         </div>
                         <!-- end of advertisement space. -->
                     </div>

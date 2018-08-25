@@ -35,6 +35,8 @@ define('STATIC_PRODUCT_IMAGE', '../images/photo.png');
 define('PRODUCT_IMAGE', 'images/photo.png');
 define('LOI_IMAGE', '../images/loi.jpg');
 
+define('USER_PROFILE', 'images/user.png');
+
 
 //define the results pers page
 function results_per_page()
@@ -315,6 +317,13 @@ function get_month($i)
     }
 
     return $month;
+}
+
+function human_filesize($bytes, $decimals = 2)
+{
+    $size = array('b','kb','Mb','gB','TB','PB','EB','ZB','YB');
+    $factor = floor((strlen($bytes) - 1) / 3);
+    return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$size[$factor];
 }
 
 

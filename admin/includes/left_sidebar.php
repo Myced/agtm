@@ -45,8 +45,8 @@
                                 <a href="javascript: void(0);"><i class="fi-mail"></i><span> LOI </span> <span class="menu-arrow"></span></a>
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li><a href="add_loi.php">Add New LOI</a></li>
+                                    <li><a href="pending_loi.php">Pending LOI</a></li>
                                     <li><a href="accepted_loi.php">Accepted LOI</a></li>
-                                    <li><a href="accepted_loi.php">Pending LOI</a></li>
                                     <li><a href="all_loi.php">All LOI</a></li>
                                 </ul>
                             </li>
@@ -55,8 +55,8 @@
                                 <a href="javascript: void(0);"><i class="fi-mail"></i><span> SCO </span> <span class="menu-arrow"></span></a>
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li><a href="add_sco.php">Add New SCO</a></li>
+                                    <li><a href="pending_sco.php">Pending SCO</a></li>
                                     <li><a href="accepted_sco.php">Accepted SCO</a></li>
-                                    <li><a href="accepted_sco.php">Pending SCO</a></li>
                                     <li><a href="all_sco.php">All SCO</a></li>
                                 </ul>
                             </li>

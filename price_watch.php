@@ -28,12 +28,14 @@ include_once 'includes/navigation.php';
     <div class="col-md-12">
         <div class="bg-white">
             <div class="p-20">
+                <h3 class="page-header">Commodies and Prices</h3>
+                <br>
+
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <tr>
                             <th>S/N</th>
                             <th>Comodity Name</th>
-                            <th>Arrivals</th>
                             <th>Price</th>
                         </tr>
                         <?php
@@ -51,7 +53,6 @@ include_once 'includes/navigation.php';
                         <tr>
                             <td><?php echo $count++; ?></td>
                             <td><?php echo $row['item']; ?></td>
-                            <td><?php echo $row['quantity'] . ' ' . $row['unit']; ?></td>
                             <td><?php echo $row['price']; ?></td>
                         </tr>
                             <?php

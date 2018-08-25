@@ -9,7 +9,7 @@ include_once 'admin/classes/class.Status.php';
 $db = new dbc();
 $dbc = $db->get_instance();
 
-$status = Status::ACCEPTED;
+$status = Status::AVAILABLE;
 
 
 include_once 'includes/head.php';
@@ -29,43 +29,54 @@ include_once 'includes/navigation.php';
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
                 <li class="active">
-                    <a href="#loi" data-toggle="tab">Available LOI </a>
+                    <a href="#loi" data-toggle="tab"> <strong>Available LOI</strong> </a>
                 </li>
-                <li><a href="#sco" data-toggle="tab">Available SCO</a></li>
+                <li><a href="#sco" data-toggle="tab"> <strong>Available SCO</strong> </a></li>
                 <!-- <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li> -->
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="loi">
-                    <h3 class="page-header">Available LOI (Buy Offers)</h3>
+                    <h3 class="page-header">Available LOI </h3>
 
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-10">
 
-                            <ul class="timeline">
+                            <ul class="timeline" >
                                 <li class="">
                                     <?php
 
                                     //get all the offers
-                                    $query = "SELECT * FROM `buy_offers` WHERE `status` = '$status' ";
+                                    $query = "SELECT * FROM `loi` WHERE `status` = '$status' ";
                                     $result = mysqli_query($dbc, $query)
                                         or die("Error.");
                                     while ($row = mysqli_fetch_array($result)) {
                                         ?>
-                                        <div class="timeline-item">
+                                        <div class="timeline-item" style="border: 1px solid #aaa;">
                                           <span class="time"><i class="fa fa-clock-o"></i> <?php echo date_from_timestamp($row['time_added']); ?> </span>
 
-                                          <h3 class="timeline-header"><a href="buy_offer_details.php?offer=<?php echo $row['id']; ?>">
-                                              <?php echo $row['product_name']; ?> Nedded
+                                          <h3 class="timeline-header"><a href="loi_details.php?offer=<?php echo $row['id']; ?>">
+                                              <?php echo $row['title']; ?>
                                               </a>
                                           </h3>
 
                                           <div class="timeline-body">
-                                            <?php
-                                            echo $row['description'];
-                                             ?>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <img src="admin/<?php echo $row['image']; ?>" alt="LOI Image"
+                                                            width="200px" height="200px">
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <?php
+                                                        $text = nl2br(substr($row['description'], 0, 200));
+
+                                                        echo $text;
+                                                         ?>
+                                                    </div>
+                                                </div>
                                           </div>
                                           <div class="timeline-footer">
-                                            <a class="btn btn-primary btn-xs" href="buy_offer_details.php?offer=<?php echo $row['id']; ?>">Read more</a>
+                                            <a class="btn btn-primary" href="loi_details.php?offer=<?php echo $row['id']; ?>">Read more</a>
                                           </div>
                                         </div>
 
@@ -79,72 +90,53 @@ include_once 'includes/navigation.php';
 
                         </div>
 
-                        <div class="col-md-6">
-                            <table class="table table-type-1">
-                                <tr class="mandis">
-                                    <th colspan="3">
-                                        <i class="fa fa-list"></i>
-                                        LATEST BUY OFFERS
-                                    </th>
-                                </tr>
 
-                                <?php
-                                $query = "SELECT * FROM `buy_offers` ORDER BY `id` DESC LIMIT 7";
-                                $result = mysqli_query($dbc, $query)
-                                    or die("Error");
-
-                                while($row = mysqli_fetch_array($result))
-                                {
-                                    ?>
-                                <tr>
-                                    <td>
-                                        <a href="buy_offer_details.php?offer=<?php echo $row['id']; ?>">
-                                            <?php echo $row['product_name']; ?>
-                                             Needed
-                                        </a>
-                                    </td>
-                                </tr>
-                                    <?php
-                                }
-                                 ?>
-
-                            </table>
-                        </div>
                     </div>
                 </div>
 
 
                 <!-- /.tab-pane -->
                 <div class="tab-pane" id="sco">
-                      <h3 class="page-header">Available SCO (Sell Offer)</h3>
+                      <h3 class="page-header">Available SCO </h3>
 
                       <div class="row">
-                          <div class="col-md-6">
+                          <div class="col-md-10">
                               <ul class="timeline">
                                   <li class="">
                                       <?php
 
                                       //get all the offers
-                                      $query = "SELECT * FROM `sell_offers` WHERE `status` = '$status' ";
+                                      $query = "SELECT * FROM `sco` WHERE `status` = '$status' ";
                                       $result = mysqli_query($dbc, $query)
                                           or die("Error.");
                                       while ($row = mysqli_fetch_array($result)) {
                                           ?>
-                                          <div class="timeline-item">
+                                          <div class="timeline-item" style="border: 1px solid #aaa;">
                                             <span class="time"><i class="fa fa-clock-o"></i> <?php echo date_from_timestamp($row['time_added']); ?> </span>
 
-                                            <h3 class="timeline-header"><a href="sell_offer_details.php?offer=<?php echo $row['id']; ?>">
-                                                <?php echo $row['product_name']; ?> For Sale
+                                            <h3 class="timeline-header"><a href="sco_details.php?offer=<?php echo $row['id']; ?>">
+                                                <?php echo $row['title']; ?>
                                                 </a>
                                             </h3>
 
                                             <div class="timeline-body">
-                                              <?php
-                                              echo $row['description'];
-                                               ?>
+                                                  <div class="row">
+                                                      <div class="col-md-6">
+                                                          <img src="admin/<?php echo $row['image']; ?>" alt="LOI Image"
+                                                              width="200px" height="200px">
+                                                      </div>
+
+                                                      <div class="col-md-6">
+                                                          <?php
+                                                          $text = nl2br(substr($row['description'], 0, 200));
+
+                                                          echo $text;
+                                                           ?>
+                                                      </div>
+                                                  </div>
                                             </div>
                                             <div class="timeline-footer">
-                                              <a class="btn btn-primary btn-xs" href="sell_offer_details.php?offer=<?php echo $row['id']; ?>">Read more</a>
+                                              <a class="btn btn-primary" href="sco_details.php?offer=<?php echo $row['id']; ?>">Read more</a>
                                             </div>
                                           </div>
 
@@ -156,37 +148,7 @@ include_once 'includes/navigation.php';
                               </ul>
                           </div>
 
-                          <div class="col-md-6">
-                              <table class="table table-type-1">
-                                  <tr class="mandis">
-                                      <th colspan="3">
-                                          <i class="fa fa-list"></i>
-                                          LATEST SELL OFFERS
-                                      </th>
-                                  </tr>
 
-                                  <?php
-                                  $query = "SELECT * FROM `sell_offers` ORDER BY `id` DESC LIMIT 7";
-                                  $result = mysqli_query($dbc, $query)
-                                      or die("Error");
-
-                                  while($row = mysqli_fetch_array($result))
-                                  {
-                                      ?>
-                                  <tr>
-                                      <td>
-                                          <a href="sell_offer_details.php?offer=<?php echo $row['id']; ?>">
-                                              <?php echo $row['product_name']; ?>
-                                               For Sale
-                                          </a>
-                                      </td>
-                                  </tr>
-                                      <?php
-                                  }
-                                   ?>
-
-                              </table>
-                          </div>
                       </div>
                   </div>
                 <!-- /.tab-pane -->

@@ -93,7 +93,7 @@ include_once 'includes/navigation.php';
                     <br>
                     <!-- //row for the threads -->
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-9">
                             <div class="table-responsive">
                                 <table class="table forum-table">
 
@@ -218,40 +218,53 @@ include_once 'includes/navigation.php';
             <!--Body-->
             <div class="modal-body ">
 
-                    <div class="form-group">
-                        <label for="title" class="control-label col-md-3">Post Title:</label>
-                        <div class="col-md-9">
-                            <input type="text" name="title" value="" class="form-control" required>
+                    <?php
+                    if(!isset($_SESSION['user_id']))
+                    {
+                        echo "<strong> This is only for Registered users </strong>";
+                        echo "<br>";
+                        echo 'Click <a href="login.php"> here </a> to login';
+                    }
+                    else {
+                        ?>
+                        <div class="form-group">
+                            <label for="title" class="control-label col-md-3">Post Title:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="title" value="" class="form-control" required
+                                placeholder="Enter the topic of your post">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="category" class="control-label col-md-3">Post Category:</label>
-                        <div class="col-md-9">
-                            <select class="form-control" name="category" required>
-                                <option value=""></option>
-                                <?php
-                                $query = "SELECT * FROM `thread_categories`";
-                                $result = mysqli_query($dbc, $query)
-                                    or die("Could not get Post Categories");
-                                while ($row = mysqli_fetch_array($result)) {
-                                    ?>
-                                <option value="<?php echo $row['id']; ?>">
-                                    <?php echo $row['title']; ?>
-                                </option>
+                        <div class="form-group">
+                            <label for="category" class="control-label col-md-3">Post Category:</label>
+                            <div class="col-md-9">
+                                <select class="form-control" name="category" required>
+                                    <option value=""></option>
                                     <?php
-                                }
-                                 ?>
-                            </select>
+                                    $query = "SELECT * FROM `thread_categories`";
+                                    $result = mysqli_query($dbc, $query)
+                                        or die("Could not get Post Categories");
+                                    while ($row = mysqli_fetch_array($result)) {
+                                        ?>
+                                    <option value="<?php echo $row['id']; ?>">
+                                        <?php echo $row['title']; ?>
+                                    </option>
+                                        <?php
+                                    }
+                                     ?>
+                                </select>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="title" class="control-label col-md-3">Post Details:</label>
-                        <div class="col-md-9">
-                            <textarea name="description" rows="8" class="form-control" placeholder="Enter your Post here" required></textarea>
+                        <div class="form-group">
+                            <label for="title" class="control-label col-md-3">Post Details:</label>
+                            <div class="col-md-9">
+                                <textarea name="description" rows="8" class="form-control" placeholder="Enter your Post here" required></textarea>
+                            </div>
                         </div>
-                    </div>
+                        <?php
+                    }
+                     ?>
 
             </div>
 

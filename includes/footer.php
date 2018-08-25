@@ -4,8 +4,8 @@
         <div class="col-xs-12 col-md-12">
 
             <div class="col-xs-12 col-md-5">
-                <a href="#">
-                    About
+                <a href="about_us.php">
+                    About Us
                 </a>
 
                 |

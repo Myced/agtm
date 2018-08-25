@@ -290,3 +290,25 @@ footer
 {
     text-align: left;
 }
+
+.loi-heading
+{
+    font-size: 1.6em;
+}
+
+.border-gray
+{
+    border: 1px solid gray;
+}
+
+.loi-image
+{
+    width: 100%;
+    height: 100%;
+}
+
+.thumbnail
+{
+    width: 100px;
+    height: 100px;
+}
