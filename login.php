@@ -76,6 +76,26 @@ if(isset($_POST['username']))
                     header("Location: admin/index.php");
                 }
                 elseif($level == Level::MODERATOR) {
+                    //then set all session variable for the user
+                    $query = "SELECT * FROM `user_prefs` WHERE `user_id` = '$user_id' ";
+                    $result = mysqli_query($dbc, $query)
+                        or die("Error. Cannot get user preferences");
+
+                    while($row = mysqli_fetch_array($result))
+                    {
+                        $_SESSION['categories'] = $row['categories'];
+                        $_SESSION['loi'] = $row['loi'];
+                        $_SESSION['sco'] = $row['sco'];
+                        $_SESSION['spot_prices'] = $row['spot_prices'];
+                        $_SESSION['importers'] = $row['importers'];
+                        $_SESSION['exporters'] = $row['exporters'];
+                        $_SESSION['buy_offers'] = $row['buy_offers'];
+                        $_SESSION['sell_offers'] = $row['sell_offers'];
+                        $_SESSION['products'] = $row['products'];
+                        $_SESSION['newsletter'] = $row['newsletter'];
+                        $_SESSION['quotation'] = $row['quotation'];
+                    }
+
                     header("Location: admin/index.php");
                 }
                 else {

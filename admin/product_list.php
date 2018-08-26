@@ -1,10 +1,11 @@
 <?php
 //
 //database and other function initialisations
+include_once 'includes/session.php';
+include_once '../classes/class.Level.php';
 include_once '../classes/class.dbc.php';
 include_once '../includes/functions.php';
 include_once '../includes/day.php';
-include_once 'includes/admin.php';
 include_once 'classes/class.Product.php';
 
 //initialise the database connection

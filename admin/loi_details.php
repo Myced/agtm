@@ -2,10 +2,10 @@
 //
 //database and other function initialisations
 include_once 'includes/session.php';
+include_once '../classes/class.Level.php';
 include_once '../classes/class.dbc.php';
 include_once '../includes/functions.php';
 include_once '../includes/day.php';
-include_once 'includes/admin.php';
 include_once 'classes/class.Status.php';
 
 //initialise the database connection
@@ -235,7 +235,7 @@ include_once 'includes/start.php';
                     <br><br>
                     <div class="row">
                         <div class="col-md-12">
-                            <?php echo $row['description']; ?>
+                            <?php echo nl2br($row['description']); ?>
                         </div>
                     </div>
                 </div>

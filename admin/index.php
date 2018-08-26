@@ -1,9 +1,12 @@
 <?php
 //
 //database and other function initialisations
+include_once 'includes/session.php';
 include_once '../classes/class.dbc.php';
 include_once '../includes/functions.php';
 include_once '../includes/day.php';
+include_once 'includes/admin.php';
+include_once '../classes/class.Level.php';
 
 //initialise the database connection
 $db = new dbc();
@@ -30,9 +33,11 @@ include_once 'includes/start.php';
     <div class="col-md-12">
         <div class="">
             <h1 class="page-header">
-                
+
             </h1>
 
+            <?php
+             ?>
         </div>
     </div>
 </div>

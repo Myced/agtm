@@ -2,10 +2,10 @@
 //
 //database and other function initialisations
 include_once 'includes/session.php';
+include_once '../classes/class.Level.php';
 include_once '../classes/class.dbc.php';
 include_once '../includes/functions.php';
 include_once '../includes/day.php';
-include_once 'includes/admin.php';
 
 //initialise the database connection
 $db = new dbc();
@@ -35,7 +35,18 @@ include_once 'includes/start.php';
                 Add Product
             </h1>
 
+            <?php
+            $mag = 'ced';
+
+            $ced = true ? isset($mag) : false;
+
+            echo $ced;
+
+            var_dump($ced);
+             ?>
+
         </div>
+
     </div>
 </div>
 

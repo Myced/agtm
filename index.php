@@ -508,8 +508,18 @@ if(isset($_POST['quotation']))
 
                         <!-- advertisement space -->
                         <div class="col-md-3">
+                            <br>
                             <div class="row">
-                                <img src="" alt="">
+                                <div class="col-md-12">
+                                    <img src="images/1.jpg" alt="Just an image" width="100%" height="250px" >
+                                </div>
+                            </div>
+
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <img src="images/2.jpg" alt="Just an image" width="100%" height="250px" >
+                                </div>
                             </div>
                         </div>
                         <!-- end of advertisement space. -->

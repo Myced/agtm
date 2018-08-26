@@ -56,19 +56,19 @@
 
             <div class="col-xs-12 col-md-3">
                 <div class="text-center">
-                    <a href="http://twitter.com" class="btn btn-social-icon btn-twitter">
+                    <a href="https://twitter.com/tradingapex" class="btn btn-social-icon btn-twitter" target="_blank">
                         <i class="fa fa-twitter"></i>
                     </a>
 
-                    <a href="http://www.facebook.com" class="btn btn-social-icon btn-facebook">
+                    <a href="https://web.facebook.com/apexglobaltradingandmarketing/" class="btn btn-social-icon btn-facebook" target="_blank">
                         <i class="fa fa-facebook"></i>
                     </a>
 
-                    <a href="http://plus.google.com" class="btn btn-social-icon btn-google">
-                        <i class="fa fa-google-plus"></i>
+                    <a href="https://www.instagram.com/agtm_official/" class="btn btn-social-icon btn-instagram" target="_blank">
+                        <i class="fa fa-instagram"></i>
                     </a>
 
-                    <a href="http://www.linkedIn.com" class="btn btn-social-icon btn-linkedin">
+                    <a href="https://www.linkedin.com/in/apex-global-trading-and-marketing-9b607416b/" class="btn btn-social-icon btn-linkedin" target="_blank">
                         <i class="fa fa-linkedin"></i>
                     </a>
                 </div>

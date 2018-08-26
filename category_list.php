@@ -1,6 +1,7 @@
 <?php
 //
 //database and other function initialisations
+
 include_once '../classes/class.dbc.php';
 include_once '../includes/functions.php';
 include_once '../includes/day.php';

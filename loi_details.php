@@ -1,7 +1,6 @@
 <?php
 
 include_once 'includes/class.dbc.php';
-include_once 'includes/session.php';
 include_once 'includes/functions.php';
 include_once 'includes/day.php';
 include_once 'admin/classes/class.Status.php';
