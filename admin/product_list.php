@@ -130,7 +130,7 @@ include_once 'includes/start.php';
                 <?php
                 while($row = mysqli_fetch_array($result))
                 {
-                    $product = new Product($row['product_code'])
+                    $product = new Product($row['id'])
 
                     ?>
                     <div class="col-md-6 col-lg-4">

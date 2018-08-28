@@ -51,7 +51,7 @@ if(isset($_GET['action']))
         $query = "DELETE FROM `users` WHERE `user_id` = '$id'";
         $result = mysqli_query($dbc, $query);
 
-        $success = "ITEM DELETED";
+        $success = "USER DELETED";
     }
     elseif($action == 'block')
     {
