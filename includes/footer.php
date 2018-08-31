@@ -16,7 +16,7 @@
 
                 |
 
-                <a href="#">
+                <a href="advertise.php">
                     Advertise
                 </a>
 
@@ -34,7 +34,7 @@
 
                 |
 
-                <a href="#">
+                <a href="privacy_policy.php">
                     Privacy Policy
                 </a>
 

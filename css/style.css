@@ -312,3 +312,46 @@ footer
     width: 100px;
     height: 100px;
 }
+
+.ad-list
+{
+    padding: 20px;
+    margin-left: 50px;
+    font-size: 16px;
+}
+
+.color-menu
+{
+    color: #5f9ddd;
+    font-weight: bolder;
+}
+
+.floating-btn
+{
+    position: fixed;
+    background-color: #7721af;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #fff;
+    text-align: center;
+    color: white;
+
+    right: 50px;
+    bottom: 20px;
+}
+
+.floating-btn:hover
+{
+    color: #fff;
+}
+
+.p-menu
+{
+    text-transform: uppercase;
+}
+
+ul.list
+{
+    color: #aaa;
+}
