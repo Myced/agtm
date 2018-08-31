@@ -349,9 +349,5 @@ footer
 .p-menu
 {
     text-transform: uppercase;
-}
-
-ul.list
-{
-    color: #aaa;
+    font-size: 1.5em;
 }

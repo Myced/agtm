@@ -45,31 +45,31 @@ include_once 'includes/navigation.php';
                 </li>
 
                 <li class="p-menu">
-                    <a href="#">Rights Regarding Personnal Data</a>
+                    <a href="#data">Rights Regarding Personnal Data</a>
                 </li>
 
                 <li class="p-menu">
-                    <a href="#">Cookies</a>
+                    <a href="#cookies">Cookies</a>
                 </li>
 
                 <li class="p-menu">
-                    <a href="#">Minors</a>
+                    <a href="#minors">Minors</a>
                 </li>
 
                 <li class="p-menu">
-                    <a href="#">SECURITY MEASURES</a>
+                    <a href="#security">SECURITY MEASURES</a>
                 </li>
 
                 <li class="p-menu">
-                    <a href="#">CHANGES TO THIS PRIVACY POLICY</a>
+                    <a href="#changes">CHANGES TO THIS PRIVACY POLICY</a>
                 </li>
 
-                <li class="p-menu">
+                <!-- <li class="p-menu">
                     <a href="#">VISITORS FROM THE EUROPEAN UNION</a>
-                </li>
+                </li> -->
 
                 <li class="p-menu">
-                    <a href="#">HOW TO CONTACT US.</a>
+                    <a href="#contact">HOW TO CONTACT US.</a>
                 </li>
             </ol>
         </div>
@@ -244,7 +244,7 @@ include_once 'includes/navigation.php';
             <!-- end of row -->
 
             <!-- //ech row for an element -->
-            <div class="row" id="personal">
+            <div class="row" id="disclosure">
                 <div class="col-md-12 color-menu">
                     <h3>C. DISCLOSURE OF PERSONAL DATA</h3>
                 </div>
@@ -381,7 +381,7 @@ include_once 'includes/navigation.php';
             <!-- end of row -->
 
             <!-- //ech row for an element -->
-            <div class="row" id="personal">
+            <div class="row" id="data">
                 <div class="col-md-12 color-menu">
                     <h3>D. RIGHTS REGARDING PERSONAL DATA</h3>
                 </div>
@@ -854,6 +854,21 @@ include_once 'includes/toast.php';
 ?>
 <!-- custom scripts here -->
 <script type="text/javascript" src="js/jquery.localScroll.min.js"></script>
+<script type="text/javascript" src="js/jquery.scrollTo.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $.localScroll.defaults.axis = 'xy';
+
+    	$.localScroll({
+    		// target: '#top', // could be a selector or a jQuery object too.
+    		// queue:true,
+    		duration:700,
+    		hash:true,
+            margin: true
+    	});
+
+    });
+</script>
 
 <?php
 include_once 'includes/end.php';
