@@ -22,7 +22,7 @@
 
                 |
 
-                <a href="#">
+                <a href="feedback.php">
                     Feedback
                 </a>
 
