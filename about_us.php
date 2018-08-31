@@ -86,6 +86,57 @@ include_once 'includes/navigation.php';
 
                     <div class="row">
                         <div class="col-md-12">
+                            <h3 class="text-info">QUARANTEE OF TRADE</h3>
+
+                            <p>
+                                In this module of business, we guarantee trade in the following ways
+                            </p>
+
+                            <ul>
+                                <li>
+                                    We provide agents in every country, where they serve as day to day
+                                    monitor of trade process, provide live feeds as videos, photos of
+                                     entire process, they also investigate both legal and existence
+                                     wise of all parties involved, they serve as representatives to
+                                      all parties involved and initiate sit down meetings
+                                    (this service is paid for and is categorized, please contact us)
+                                </li>
+
+                                <li>
+                                    We also serve as mediators for any trade and in which case we
+                                    monitor both, and in this case , we seek a commission which is
+                                    mandatory but payable after successful closure of deal
+                                    ( 4 – 8% based on trade type and requirements )
+                                </li>
+
+                                <li>
+                                    We can link both parties up, and in which case we do not
+                                    collect any commission from them, they both will pay a
+                                     non-refundable fee to us
+                                </li>
+                            </ul>
+
+                            <p>
+
+                                Any LOI or SCO placed on this platform are confirmed and verified
+
+                                <br>
+                                Any Supply or Buyer on this platform is been verified and 100% legit
+                            </p>
+
+                            <br><br>
+                            <p>
+                                WE ARE CONFIDENT OF OUR BRAND AND MODULE, THAT IS WHY WE CHOOSE TO WORK WITH THE BEST ONLY
+
+                                <br><br>
+                                LET YOUR MONEY WORK FOR YOU
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
                             <div class="">
                                 <h4 class="text-info page-header text-center"> Info</h4>
 
