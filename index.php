@@ -125,26 +125,28 @@ if(isset($_POST['quotation']))
 
                             <h3 class="categories">Categories</h3>
 
-                            <ul class="categories">
-                                <?php
+                            <div class="slim">
+                                <ul class="categories">
+                                    <?php
 
-                                //get all the categories
-                                $query = "SELECT * FROM `categories` LIMIT 10";
-                                $result = mysqli_query($dbc, $query)
-                                   or die("Sorry. Internal Error");
+                                    //get all the categories
+                                    $query = "SELECT * FROM `categories` LIMIT 10";
+                                    $result = mysqli_query($dbc, $query)
+                                       or die("Sorry. Internal Error");
 
-                               while($row = mysqli_fetch_array($result))
-                               {
-                                   ?>
-                                <li>
-                                   <a href="products.php?category=<?php echo $row['id']; ?>">
-                                       <?php echo $row['category_name']; ?>
-                                   </a>
-                                </li>
-                                   <?php
-                               }
-                                 ?>
-                            </ul>
+                                   while($row = mysqli_fetch_array($result))
+                                   {
+                                       ?>
+                                    <li>
+                                       <a href="products.php?category=<?php echo $row['id']; ?>">
+                                           <?php echo $row['category_name']; ?>
+                                       </a>
+                                    </li>
+                                       <?php
+                                   }
+                                     ?>
+                                </ul>
+                            </div>
 
 
                         </div>
@@ -541,6 +543,7 @@ if(isset($_POST['quotation']))
          include_once 'includes/toast.php';
 
          ?>
+         <script type="text/javascript" src="js/jquery.slimscroll.js"></script>
          <script type="text/javascript" src="js/jquery.easing.min.js"></script>
          <script type="text/javascript" src="js/jquery.easy-ticker.min.js"></script>
          <script type="text/javascript">
@@ -560,6 +563,10 @@ if(isset($_POST['quotation']))
             			stopText: 'Stop !!!'
             		}
             	}).data('easyTicker');
+
+                $('.slim').slimScroll({
+            		height: '300px'
+            	});
              })
          </script>
      </body>
