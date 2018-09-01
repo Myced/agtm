@@ -62,7 +62,44 @@ if(isset($_POST['quotation']))
          <link rel="stylesheet" href="css/AdminLTE.css">
          <link rel="stylesheet" href="css/style.css">
          <link rel="stylesheet" href="css/toastr.min.css">
+         <link rel="stylesheet" href="plugins/slick/slick.css">
+         <!-- <link rel="stylesheet" href="plugins/slick/slick-theme.css"> -->
+         <style media="screen">
+            .slick-prev,
+            .slick-next {
+             font-size: 0;
+             position: absolute;
+             bottom: 50px;
+             color: #d5122f;
+             border: 0;
+             background: none;
+             z-index: 1;
+            }
 
+            .slick-prev {
+             left: 20px;
+            }
+
+            .slick-prev:after {
+               content: "\f104";
+             font: 40px/1 'FontAwesome';
+            }
+
+            .slick-next {
+             right: 20px;
+             text-align: right;
+            }
+
+            .slick-next:after {
+                content: "\f105";
+              font: 40px/1 'FontAwesome';
+            }
+
+            .slick-prev:hover:after,
+            .slick-next:hover:after {
+             color: #7e7e7e;
+            }
+         </style>
 
          <?php
          include_once 'includes/navigation.php';
@@ -461,49 +498,100 @@ if(isset($_POST['quotation']))
                             <div class="row">
 
                                 <!-- //title -->
-                                <div class="col-md-12">
-                                    <h3 class="page-header">Products </h3>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3 class="page-header">Products </h3>
+                                    </div>
                                 </div>
 
-                                <!-- //now get the latest 6 products  -->
-                                <?php
-                                //perform the query
-                                $query = " SELECT * FROM `products` ORDER BY `id` DESC LIMIT 6";
-                                $result = mysqli_query($dbc, $query)
-                                    or die("Error. Could not get the products");
+                                <!-- //peform slick for the first five items  -->
+                                <div class="row ">
+                                    <div class="slider first">
+                                        <?php
+                                        //perform the query
+                                        $query = " SELECT * FROM `products` ORDER BY `id` DESC LIMIT 6";
+                                        $result = mysqli_query($dbc, $query)
+                                            or die("Error. Could not get the products");
 
-                                while ($row = mysqli_fetch_array($result)) {
+                                        while ($row = mysqli_fetch_array($result)) {
 
-                                    $product = new Product($row['id']);
-                                    $pic = 'admin/' . $product->photo;
-                                    $default_pic  = PRODUCT_IMAGE;
-                                    ?>
-                                    <div class="col-md-6 p-10">
-                                        <div class="row">
-                                            <div class="col-xs-12 col-md-3">
-                                                <img
-                                                src="<?php if($product->photo != '' && file_exists($pic)) { echo $pic; } else { echo $default_pic; } ?>"
-                                                alt="Product Image" class="product-image">
-                                            </div>
+                                            $product = new Product($row['id']);
+                                            $pic = 'admin/' . $product->photo;
+                                            $default_pic  = PRODUCT_IMAGE;
+                                            ?>
+                                            <div class="col-md-5 p-10">
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-md-3">
+                                                        <img
+                                                        src="<?php if($product->photo != '' && file_exists($pic)) { echo $pic; } else { echo $default_pic; } ?>"
+                                                        alt="Product Image" class="product-image">
+                                                    </div>
 
-                                            <div class="col-xs-12 col-md-9">
-                                                <div class="middle text-center p-20">
-                                                    <span class="product-name"><?php echo $product->product_name; ?></span>
+                                                    <div class="col-xs-12 col-md-9">
+                                                        <div class="middle text-center p-20">
+                                                            <span class="product-name"><?php echo $product->product_name; ?></span>
 
-                                                    <br><br>
+                                                            <br><br>
 
-                                                    <span class="bolder">
-                                                        US $<span class="price"> <?php echo $product->price; ?> </span>
-                                                    </span>
+                                                            <span class="bolder">
+                                                                US $<span class="price"> <?php echo $product->price; ?> </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
                                                 </div>
+
+
                                             </div>
-                                        </div>
-
-
+                                            <?php
+                                        }
+                                         ?>
                                     </div>
-                                    <?php
-                                }
-                                 ?>
+                                </div>
+
+                                <!-- next row for the next six items  -->
+                                <div class="row">
+                                    <div class="slider first">
+                                        <?php
+                                        //perform the query
+                                        $query = " SELECT * FROM `products` ORDER BY `id` DESC LIMIT 6, 6";
+                                        $result = mysqli_query($dbc, $query)
+                                            or die("Error. Could not get the products");
+
+                                        while ($row = mysqli_fetch_array($result)) {
+
+                                            $product = new Product($row['id']);
+                                            $pic = 'admin/' . $product->photo;
+                                            $default_pic  = PRODUCT_IMAGE;
+                                            ?>
+                                            <div class="col-md-5 p-10">
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-md-3">
+                                                        <img
+                                                        src="<?php if($product->photo != '' && file_exists($pic)) { echo $pic; } else { echo $default_pic; } ?>"
+                                                        alt="Product Image" class="product-image">
+                                                    </div>
+
+                                                    <div class="col-xs-12 col-md-9">
+                                                        <div class="middle text-center p-20">
+                                                            <span class="product-name"><?php echo $product->product_name; ?></span>
+
+                                                            <br><br>
+
+                                                            <span class="bolder">
+                                                                US $<span class="price"> <?php echo $product->price; ?> </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <?php
+                                        }
+                                         ?>
+                                    </div>
+                                </div>
+
 
                             </div>
                         </div>
@@ -543,6 +631,7 @@ if(isset($_POST['quotation']))
          include_once 'includes/toast.php';
 
          ?>
+         <script type="text/javascript" src="plugins/slick/slick.min.js"></script>
          <script type="text/javascript" src="js/jquery.slimscroll.js"></script>
          <script type="text/javascript" src="js/jquery.easing.min.js"></script>
          <script type="text/javascript" src="js/jquery.easy-ticker.min.js"></script>
@@ -567,6 +656,15 @@ if(isset($_POST['quotation']))
                 $('.slim').slimScroll({
             		height: '300px'
             	});
+
+
+                //initialse slick too
+                $('.first').slick({
+                  slidesToShow: 2,
+                  slidesToScroll: 1,
+                  autoplay: true,
+                  autoplaySpeed: 2000,
+                });
              })
          </script>
      </body>

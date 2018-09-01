@@ -178,6 +178,21 @@
                                 <?php
                             }
 
+                            if($_SESSION['level'] == Level::ADMIN || $_SESSION['forum'])
+                            {
+                                ?>
+                                <li>
+                                    <a href="javascript: void(0);"><i class="fa fa-envelope"></i><span> Manage Forum </span> <span class="menu-arrow"></span></a>
+                                    <ul class="nav-second-level" aria-expanded="false">
+                                        <li><a href="all_topics.php"> All Forum Topics </a></li>
+                                        <li><a href="flagged_topics.php"> Flagged Forum Topics </a></li>
+                                        <li><a href="all_replies.php"> All Replies </a></li>
+                                        <li><a href="all_topics.php"> Flagged Forum Replies </a></li>
+                                    </ul>
+                                </li>
+                                <?php
+                            }
+
                             if($_SESSION['level'] == Level::ADMIN)
                             {
                                 ?>
