@@ -161,7 +161,8 @@ if(isset($_POST['quotation']))
                                     </h3>
 
                                     <div class="table-responsive">
-                                        <table class="table table-home">
+
+                                        <table class="table table-home vticker">
                                             <?php
                                             $query = "SELECT * FROM `loi` WHERE `status`  = '$loiStatus' ORDER BY `id` DESC LIMIT 10";
                                             $result = mysqli_query($dbc, $query)
@@ -201,7 +202,7 @@ if(isset($_POST['quotation']))
                                     </h3>
 
                                     <div class="table-responsive">
-                                        <table class="table table-home">
+                                        <table class="table table-home vticker">
 
                                             <?php
                                             $query = "SELECT * FROM `sco` WHERE `status` = '$loiStatus' ORDER BY `id` DESC LIMIT 5";
@@ -250,7 +251,7 @@ if(isset($_POST['quotation']))
                                     </h3>
 
                                     <div class="table-responsive">
-                                        <table class="table table-home">
+                                        <table class="table table-home vticker">
                                             <?php
                                             //get the latest buy offers
                                             $product_status = Status::ACCEPTED;
@@ -297,7 +298,7 @@ if(isset($_POST['quotation']))
                                     </h3>
 
                                     <div class="table-responsive">
-                                        <table class="table table-home">
+                                        <table class="table table-home vticker">
                                             <?php
                                             //get the latest buy offers
                                             $product_status = Status::ACCEPTED;
@@ -540,5 +541,26 @@ if(isset($_POST['quotation']))
          include_once 'includes/toast.php';
 
          ?>
+         <script type="text/javascript" src="js/jquery.easing.min.js"></script>
+         <script type="text/javascript" src="js/jquery.easy-ticker.min.js"></script>
+         <script type="text/javascript">
+             $(document).ready(function(){
+                 var dd = $('.vticker').easyTicker({
+            		direction: 'up',
+            		easing: 'easeInOutBack',
+            		speed: 'slow',
+            		interval: 2000,
+            		height: 'auto',
+            		visible: 8,
+            		mousePause: 0,
+            		controls: {
+            			up: '.up',
+            			down: '.down',
+            			toggle: '.toggle',
+            			stopText: 'Stop !!!'
+            		}
+            	}).data('easyTicker');
+             })
+         </script>
      </body>
  </html>
