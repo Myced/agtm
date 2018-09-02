@@ -187,7 +187,7 @@
                                         <li><a href="all_topics.php"> All Forum Topics </a></li>
                                         <li><a href="flagged_topics.php"> Flagged Forum Topics </a></li>
                                         <li><a href="all_replies.php"> All Replies </a></li>
-                                        <li><a href="all_topics.php"> Flagged Forum Replies </a></li>
+                                        <li><a href="flagged_replies.php"> Flagged Forum Replies </a></li>
                                     </ul>
                                 </li>
                                 <?php

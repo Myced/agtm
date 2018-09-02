@@ -82,6 +82,7 @@ if(isset($_POST['worker_name']))
         $products = TRUE;
         $newsletter = TRUE;
         $quotation = TRUE;
+        $forum = TRUE;
     }
     elseif ($level == Level::USER) {
         $categories = FALSE;
@@ -95,6 +96,7 @@ if(isset($_POST['worker_name']))
         $products = FALSE;
         $newsletter = FALSE;
         $quotation = FALSE;
+        $forum = FALSE;
     }
     else {
         //GET moderatore previledges as set
@@ -109,6 +111,7 @@ if(isset($_POST['worker_name']))
         $products = TRUE ? isset($_POST['products']) : FALSE;
         $newsletter = TRUE ? isset($_POST['newsletter']) : FALSE;
         $quotation = TRUE ? isset($_POST['quotation']) : FALSE;
+        $forum = TRUE ? isset($_POST['forum']) : FALSE;
     }
 
     //check that the passwords Match
@@ -215,11 +218,11 @@ if(isset($_POST['worker_name']))
 
         $prev = "INSERT INTO `user_prefs` (`user_id`, `user_level`, `categories`, `loi`, `sco`,
                             `spot_prices`, `importers`, `exporters`, `sell_offers`, `buy_offers`,
-                            `products`, `newsletter`, `quotation`
+                            `products`, `newsletter`, `quotation`, `forum`
          )
                 VALUES ('$user', '$level', '$categories', '$loi', '$sco',
                             '$spot_prices', '$importers', '$exporters', '$sell_offer', '$buy_offer',
-                            '$products', '$newsletter', '$quotation'
+                            '$products', '$newsletter', '$quotation', '$forum'
                 )
          ";
 
@@ -500,6 +503,17 @@ include_once 'includes/start.php';
                                             <input id="quotation" type="checkbox" name="quotation">
                                             <label for="quotation" class="text-bold">
                                                 Quotation
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="checkbox checkbox-custom">
+                                            <input id="forum" type="checkbox" name="forum">
+                                            <label for="forum" class="text-bold">
+                                                Forum
                                             </label>
                                         </div>
                                     </div>

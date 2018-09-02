@@ -75,6 +75,7 @@ if(isset($_POST['worker_name']))
         $products = TRUE;
         $newsletter = TRUE;
         $quotation = TRUE;
+        $forum = TRUE;
     }
     elseif ($level == Level::USER) {
         $categories = FALSE;
@@ -88,6 +89,7 @@ if(isset($_POST['worker_name']))
         $products = FALSE;
         $newsletter = FALSE;
         $quotation = FALSE;
+        $forum = FALSE;
     }
     else {
         //GET moderatore previledges as set
@@ -102,6 +104,7 @@ if(isset($_POST['worker_name']))
         $products = TRUE ? isset($_POST['products']) : FALSE;
         $newsletter = TRUE ? isset($_POST['newsletter']) : FALSE;
         $quotation = TRUE ? isset($_POST['quotation']) : FALSE;
+        $forum = TRUE ? isset($_POST['forum']) : FALSE;
     }
 
 
@@ -181,7 +184,8 @@ if(isset($_POST['worker_name']))
 
         $prev = "UPDATE `user_prefs`  SET  `user_level` = '$level', `categories`='$categories', `loi`='$loi', `sco` = '$sco',
                             `spot_prices`='$spot_prices', `importers` = '$importers', `exporters`= '$exporters', `sell_offers`='$sell_offer',
-                             `buy_offers` = '$buy_offer', `products` = '$products', `newsletter` = '$newsletter', `quotation` = '$quotation'
+                             `buy_offers` = '$buy_offer', `products` = '$products', `newsletter` = '$newsletter',
+                             `quotation` = '$quotation', `forum` = '$forum'
 
                 WHERE `user_id` = '$user' ";
 
@@ -503,6 +507,17 @@ include_once 'includes/start.php';
                                             <input id="quotation" type="checkbox" name="quotation"  <?php if($r['quotation'] == '1') { echo 'checked'; } ?> >
                                             <label for="quotation" class="text-bold">
                                                 Quotation
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="checkbox checkbox-custom">
+                                            <input id="forum" type="checkbox" name="forum"  <?php if($r['forum'] == '1') { echo 'checked'; } ?> >
+                                            <label for="forum" class="text-bold">
+                                                Forum
                                             </label>
                                         </div>
                                     </div>
