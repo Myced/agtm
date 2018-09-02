@@ -9,10 +9,16 @@ if(!isset($_SESSION['user_id']))
 }
 else {
     //check that the user is of admin level.
-    if($_SESSION['level'] == 1)
+    if(isset($_SESSION['level']))
     {
-        //then send them to the 503 unathorised page
-        header("Location: 401.php");
+        if($_SESSION['level'] == 1)
+        {
+            //then send them to the 503 unathorised page
+            header("Location: 401.php");
+        }
+    }
+    else {
+        header("Location: ../login.php");
     }
 }
  ?>

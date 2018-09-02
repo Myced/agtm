@@ -167,7 +167,7 @@ if(isset($_POST['quotation']))
                                     <?php
 
                                     //get all the categories
-                                    $query = "SELECT * FROM `categories` LIMIT 10";
+                                    $query = "SELECT * FROM `categories` ";
                                     $result = mysqli_query($dbc, $query)
                                        or die("Sorry. Internal Error");
 
@@ -554,6 +554,50 @@ if(isset($_POST['quotation']))
                                         <?php
                                         //perform the query
                                         $query = " SELECT * FROM `products` ORDER BY `id` DESC LIMIT 6, 6";
+                                        $result = mysqli_query($dbc, $query)
+                                            or die("Error. Could not get the products");
+
+                                        while ($row = mysqli_fetch_array($result)) {
+
+                                            $product = new Product($row['id']);
+                                            $pic = 'admin/' . $product->photo;
+                                            $default_pic  = PRODUCT_IMAGE;
+                                            ?>
+                                            <div class="col-md-5 p-10">
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-md-3">
+                                                        <img
+                                                        src="<?php if($product->photo != '' && file_exists($pic)) { echo $pic; } else { echo $default_pic; } ?>"
+                                                        alt="Product Image" class="product-image">
+                                                    </div>
+
+                                                    <div class="col-xs-12 col-md-9">
+                                                        <div class="middle text-center p-20">
+                                                            <span class="product-name"><?php echo $product->product_name; ?></span>
+
+                                                            <br><br>
+
+                                                            <span class="bolder">
+                                                                US $<span class="price"> <?php echo $product->price; ?> </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <?php
+                                        }
+                                         ?>
+                                    </div>
+                                </div>
+
+                                <!-- next row for the next six items  -->
+                                <div class="row">
+                                    <div class="slider first">
+                                        <?php
+                                        //perform the query
+                                        $query = " SELECT * FROM `products` ORDER BY `id` DESC LIMIT 12, 6";
                                         $result = mysqli_query($dbc, $query)
                                             or die("Error. Could not get the products");
 
