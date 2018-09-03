@@ -520,27 +520,27 @@ if(isset($_POST['quotation']))
                                             $default_pic  = PRODUCT_IMAGE;
                                             ?>
                                             <div class="col-md-5 p-10">
-                                                <div class="row">
-                                                    <div class="col-xs-12 col-md-3">
-                                                        <img
-                                                        src="<?php if($product->photo != '' && file_exists($pic)) { echo $pic; } else { echo $default_pic; } ?>"
-                                                        alt="Product Image" class="product-image">
-                                                    </div>
+                                                <a href="product_details.php?id=<?php echo $row['id'] ?>">
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-md-3">
+                                                            <img
+                                                            src="<?php if($product->photo != '' && file_exists($pic)) { echo $pic; } else { echo $default_pic; } ?>"
+                                                            alt="Product Image" class="product-image">
+                                                        </div>
 
-                                                    <div class="col-xs-12 col-md-9">
-                                                        <div class="middle text-center p-20">
-                                                            <span class="product-name"><?php echo $product->product_name; ?></span>
+                                                        <div class="col-xs-12 col-md-9">
+                                                            <div class="middle text-center p-20">
+                                                                <span class="product-name"><?php echo $product->product_name; ?></span>
 
-                                                            <br><br>
+                                                                <br><br>
 
-                                                            <span class="bolder">
-                                                                US $<span class="price"> <?php echo $product->price; ?> </span>
-                                                            </span>
+                                                                <span class="bolder text-black">
+                                                                    US $<span class="price"> <?php echo $product->price; ?> </span>
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-
-
+                                                </a>
                                             </div>
                                             <?php
                                         }
@@ -564,27 +564,27 @@ if(isset($_POST['quotation']))
                                             $default_pic  = PRODUCT_IMAGE;
                                             ?>
                                             <div class="col-md-5 p-10">
-                                                <div class="row">
-                                                    <div class="col-xs-12 col-md-3">
-                                                        <img
-                                                        src="<?php if($product->photo != '' && file_exists($pic)) { echo $pic; } else { echo $default_pic; } ?>"
-                                                        alt="Product Image" class="product-image">
-                                                    </div>
+                                                <a href="product_details.php?id=<?php echo $row['id']; ?>">
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-md-3">
+                                                            <img
+                                                            src="<?php if($product->photo != '' && file_exists($pic)) { echo $pic; } else { echo $default_pic; } ?>"
+                                                            alt="Product Image" class="product-image">
+                                                        </div>
 
-                                                    <div class="col-xs-12 col-md-9">
-                                                        <div class="middle text-center p-20">
-                                                            <span class="product-name"><?php echo $product->product_name; ?></span>
+                                                        <div class="col-xs-12 col-md-9">
+                                                            <div class="middle text-center p-20">
+                                                                <span class="product-name"><?php echo $product->product_name; ?></span>
 
-                                                            <br><br>
+                                                                <br><br>
 
-                                                            <span class="bolder">
-                                                                US $<span class="price"> <?php echo $product->price; ?> </span>
-                                                            </span>
+                                                                <span class="bolder text-black">
+                                                                    US $<span class="price"> <?php echo $product->price; ?> </span>
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-
-
+                                                </a>
                                             </div>
                                             <?php
                                         }
@@ -608,26 +608,28 @@ if(isset($_POST['quotation']))
                                             $default_pic  = PRODUCT_IMAGE;
                                             ?>
                                             <div class="col-md-5 p-10">
-                                                <div class="row">
-                                                    <div class="col-xs-12 col-md-3">
-                                                        <img
-                                                        src="<?php if($product->photo != '' && file_exists($pic)) { echo $pic; } else { echo $default_pic; } ?>"
-                                                        alt="Product Image" class="product-image">
-                                                    </div>
 
-                                                    <div class="col-xs-12 col-md-9">
-                                                        <div class="middle text-center p-20">
-                                                            <span class="product-name"><?php echo $product->product_name; ?></span>
+                                                <a href="product_details.php?id=<?php echo $row['id']; ?>">
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-md-3">
+                                                            <img
+                                                            src="<?php if($product->photo != '' && file_exists($pic)) { echo $pic; } else { echo $default_pic; } ?>"
+                                                            alt="Product Image" class="product-image">
+                                                        </div>
 
-                                                            <br><br>
+                                                        <div class="col-xs-12 col-md-9">
+                                                            <div class="middle text-center p-20">
+                                                                <span class="product-name"><?php echo $product->product_name; ?></span>
 
-                                                            <span class="bolder">
-                                                                US $<span class="price"> <?php echo $product->price; ?> </span>
-                                                            </span>
+                                                                <br><br>
+
+                                                                <span class="bolder">
+                                                                    US $<span class="price"> <?php echo $product->price; ?> </span>
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-
+                                                </a>
 
                                             </div>
                                             <?php

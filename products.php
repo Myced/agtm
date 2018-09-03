@@ -8,6 +8,14 @@ include_once 'includes/day.php';
 $db = new dbc();
 $dbc = $db->get_instance();
 
+if(isset($_GET['error']))
+{
+    if($_GET['error'] == 'select_prod')
+    {
+        $error = "Please you must select a product";
+    }
+}
+
 
 include_once 'includes/head.php';
 ?>
@@ -70,7 +78,7 @@ include_once 'includes/navigation.php';
 
     <div class="col-md-9">
         <div class="box box-primary with-border">
-            <div class="box-header">
+            <div class="box-header with-border">
                 <h3 class="box-title">Prouct List</h3>
             </div>
 
@@ -93,51 +101,76 @@ include_once 'includes/navigation.php';
                         or die("Error. Cannot get the products" . mysqli_error($dbc));
 
                     //now go through the results and show them
-                    while($row = mysqli_fetch_array($result))
+                    if(mysqli_num_rows($result) == 0)
                     {
-
-                        //get the picture and format it
-                        if($row['photo'] == '')
-                        {
-                            //not photo was uploaded. so picture is the defualt
-                            $pic = PRODUCT_IMAGE;
-
-                        }
-                        else {
-                            $pic = 'admin/' . $row['photo'];
-                        }
                         ?>
-                        <div class="col-md-4 ">
-                            <div class="m-10 border">
-                                <div class="row text-center">
-                                    <div class="col-md-12">
-                                        <img src="<?php echo $pic; ?>" alt="Picture" class="product-page-image">
-                                    </div>
-                                </div>
-
-                                <h4 class="box-title text-center text-bold">
-                                    <?php echo $row['product_name']; ?>
-                                </h4>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="p-10">
-                                            <div class="pull-left text-bold">
-                                                Price: <span class="price">$<?php echo $row['price']; ?></span>
-                                            </div>
-
-                                            <div class="pull-right text-bold">
-                                                Quantity: <span class="price"><?php echo $row['quantity']; ?></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="text-center">
+                            <div class="col-md-12">
+                                <br>
+                                <h3><strong class="text-primary">No Products</strong></h3>
+                                <br>
                             </div>
-
                         </div>
                         <?php
                     }
-                     ?>
+                    else {
+                        while($row = mysqli_fetch_array($result))
+                        {
+
+                            if(mysqli_num_rows($result) == 0)
+                            {
+
+                            }
+                            else {
+
+                            }
+
+                            //get the picture and format it
+                            if($row['photo'] == '')
+                            {
+                                //not photo was uploaded. so picture is the defualt
+                                $pic = PRODUCT_IMAGE;
+
+                            }
+                            else {
+                                $pic = 'admin/' . $row['photo'];
+                            }
+                            ?>
+                            <a href="product_details.php?id=<?php echo $row['id']; ?>">
+                                <div class="col-md-4 ">
+                                    <div class="m-10 border">
+                                        <div class="row text-center">
+                                            <div class="col-md-12">
+                                                <img src="<?php echo $pic; ?>" alt="Picture" class="product-page-image">
+                                            </div>
+                                        </div>
+
+                                        <h4 class="box-title text-center text-bold">
+                                            <?php echo $row['product_name']; ?>
+                                        </h4>
+
+                                        <div class="row">
+                                            <div class="col-md-12 text-black">
+                                                <div class="p-10">
+                                                    <div class="pull-left text-bold">
+                                                        Price: <span class="price">$<?php echo $row['price']; ?></span>
+                                                    </div>
+
+                                                    <div class="pull-right text-bold">
+                                                        Quantity: <span class="price"><?php echo $row['quantity']; ?></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </a>
+                            <?php
+                        }
+
+                    }
+                    ?>
                 </div>
             </div>
         </div>
