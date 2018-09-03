@@ -617,7 +617,7 @@ if(isset($_POST['quotation']))
                                                             alt="Product Image" class="product-image">
                                                         </div>
 
-                                                        <div class="col-xs-12 col-md-9">
+                                                        <div class="col-xs-12 col-md-9 text-black" >
                                                             <div class="middle text-center p-20">
                                                                 <span class="product-name"><?php echo $product->product_name; ?></span>
 

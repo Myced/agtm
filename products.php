@@ -117,13 +117,6 @@ include_once 'includes/navigation.php';
                         while($row = mysqli_fetch_array($result))
                         {
 
-                            if(mysqli_num_rows($result) == 0)
-                            {
-
-                            }
-                            else {
-
-                            }
 
                             //get the picture and format it
                             if($row['photo'] == '')
@@ -134,6 +127,11 @@ include_once 'includes/navigation.php';
                             }
                             else {
                                 $pic = 'admin/' . $row['photo'];
+
+                                if(!file_exists($pic))
+                                {
+                                    $pic = PRODUCT_IMAGE;
+                                }
                             }
                             ?>
                             <a href="product_details.php?id=<?php echo $row['id']; ?>">

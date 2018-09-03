@@ -73,41 +73,43 @@ include_once 'includes/navigation.php';
                 </div>
             </div>
 
-            <div class="box-body vticker">
-                <ul class="products-list product-list-in-box ">
-                    <?php
-                    $query = "SELECT * FROM `products` ORDER BY `id` DESC LIMIT 10";
-                    $result = mysqli_query($dbc, $query)
-                        or die("Error");
-
-                    while ($row = mysqli_fetch_array($result)) {
-                        $pic = 'admin/'. $row['photo'];
-                        $default_pic  = PRODUCT_IMAGE;
-
-                        ?>
-                    <li class="item">
-                      <div class="product-img">
-                          <img
-                          src="<?php if($row['photo'] != '' && file_exists($pic)) { echo $pic; } else { echo $default_pic; } ?>"
-                          alt="Product Image" class="product-image">
-                      </div>
-                      <div class="product-info">
-                        <a href="product_details.php?id=<?php echo $row['id']; ?>" class="product-title">
-                            <?php echo $row['product_name']; ?>
-                          <span class="label label-primary pull-right">
-                              $<?php echo $row['price']; ?>
-                          </span>
-                      </a>
-                        <span class="product-description">
-                            <?php echo substr($row['description'], 0, 20); ?>
-                        </span>
-                      </div>
-                    </li>
+            <div class="box-body">
+                <div class="p-20 vticker">
+                    <ul class="products-list product-list-in-box ">
                         <?php
-                    }
-                     ?>
+                        $query = "SELECT * FROM `products` ORDER BY `id` DESC LIMIT 10";
+                        $result = mysqli_query($dbc, $query)
+                            or die("Error");
 
-              </ul>
+                        while ($row = mysqli_fetch_array($result)) {
+                            $pic = 'admin/'. $row['photo'];
+                            $default_pic  = PRODUCT_IMAGE;
+
+                            ?>
+                        <li class="item">
+                          <div class="product-img">
+                              <img
+                              src="<?php if($row['photo'] != '' && file_exists($pic)) { echo $pic; } else { echo $default_pic; } ?>"
+                              alt="Product Image" class="product-image">
+                          </div>
+                          <div class="product-info">
+                            <a href="product_details.php?id=<?php echo $row['id']; ?>" class="product-title">
+                                <?php echo $row['product_name']; ?>
+                              <span class="label label-primary pull-right">
+                                  $<?php echo $row['price']; ?>
+                              </span>
+                          </a>
+                            <span class="product-description">
+                                <?php echo substr($row['description'], 0, 20); ?>
+                            </span>
+                          </div>
+                        </li>
+                            <?php
+                        }
+                         ?>
+
+                  </ul>
+                </div>
             </div>
         </div>
     </div>
