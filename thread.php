@@ -5,12 +5,94 @@ include_once 'includes/session.php';
 include_once 'includes/functions.php';
 include_once 'includes/day.php';
 include_once 'admin/classes/class.User.php';
+include_once 'classes/class.Level.php';
 
 //create a databse connection
 $db = new dbc();
 $dbc = $db->get_instance();
 
 $errors = [];
+
+if(isset($_GET['action']))
+{
+    $id = filter($_GET['id']);
+    $type = filter($_GET['type']);
+    $action = filter($_GET['action']);
+
+    if($type == 'post')
+    {
+        if($action == 'del')
+        {
+            //delete the post
+            $query  = "DELETE FROM `threads` WHERE `id` = '$id'";
+            $result = $dbc->query($query);
+
+            $success = "Post Deleted";
+
+        }
+        elseif ($action == 'flag')
+        {
+            //flage the post
+            $query = "UPDATE `threads` SET `flagged` = '1' WHERE `id` = '$id' ";
+            $result = $dbc->query($query);
+
+            $success = "Post Flagged";
+
+        }
+        elseif ($action == 'unflag') {
+            //flage the post
+            $query = "UPDATE `threads` SET `flagged` = '0' WHERE `id` = '$id' ";
+            $result = $dbc->query($query);
+
+            $success = "Post Unflagged";
+        }
+        else {
+            $warning = "Unknown Action";
+        }
+    }
+
+    if($type == 'comment')
+    {
+        if(isset($_GET['cid']))
+        {
+            $cid = filter($_GET['cid']);
+        }
+        else {
+            $cid = '';
+        }
+
+        //now take the appropriate action
+
+        if($action == 'del')
+        {
+            //delete the post
+            $query  = "DELETE FROM `replies` WHERE `id` = '$cid'";
+            $result = $dbc->query($query);
+
+            $success = "Reply Deleted";
+
+        }
+        elseif ($action == 'flag')
+        {
+            //flage the post
+            $query = "UPDATE `replies` SET `flagged` = '1' WHERE `id` = '$cid' ";
+            $result = $dbc->query($query);
+
+            $success = "Reply Flagged";
+
+        }
+        elseif ($action == 'unflag') {
+            //flage the post
+            $query = "UPDATE `replies` SET `flagged` = '0' WHERE `id` = '$cid' ";
+            $result = $dbc->query($query);
+
+            $success = "Reply Unflagged";
+        }
+        else {
+            $warning = "Unknown Action";
+        }
+    }
+}
 
 //save the reply
 if(isset($_POST['reply']))
@@ -142,7 +224,7 @@ include_once 'includes/navigation.php';
 
                     while($row = $result->fetch_assoc())
                     {
-
+                        $status = $row['flagged'];
                         (int) $views = $row['views'];
                         $views++;
 
@@ -199,7 +281,102 @@ include_once 'includes/navigation.php';
 
                       <!-- /.box-footer -->
                       <div class="box-footer">
-                          <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
+                          <button type="button" class="btn btn-default btn-xs" id="like">
+                              <i class="fa fa-thumbs-o-up"></i>
+                              Like
+                          </button>
+
+                          <!-- action buttons  -->
+                          <?php
+                          if(isset($_SESSION['user_id']))
+                          {
+                              if(isset($_SESSION['level']))
+                              {
+                                  if($_SESSION['level'] == Level::MODERATOR)
+                                  {
+                                      ?>
+                                      Status:
+
+                                      <?php
+                                          if($status == TRUE)
+                                          {
+                                              ?>
+                                          <div class="badge bg-red">
+                                              <i class="fa fa-times"></i>
+                                              Flagged
+                                          </div>
+                                          <a href="thread.php?id=<?php echo $id; ?>&action=unflag&type=post"
+                                              class="btn btn-success btn-xs">
+                                              <i class="fa fa-check"></i>
+                                              UnFlag
+                                          </a>
+                                              <?php
+                                          }
+                                          else {
+                                              ?>
+                                          <div class="badge bg-green">
+                                              <i class="fa fa-check"></i>
+                                              Ok
+                                          </div>
+                                          <a href="thread.php?id=<?php echo $id; ?>&action=flag&type=post"
+                                              class="btn btn-warning btn-xs">
+                                              <i class="fa fa-exclamation"></i>
+                                              Flag
+                                          </a>
+                                              <?php
+                                          }
+                                       ?>
+
+                                      <?php
+                                  }
+                                  if($_SESSION['level'] == Level::ADMIN)
+                                  {
+                                      ?>
+                                      Status:
+
+                                      <?php
+                                          if($status == TRUE)
+                                          {
+                                              ?>
+                                          <div class="badge bg-red">
+                                              <i class="fa fa-times"></i>
+                                              Flagged
+                                          </div>
+                                          <a href="thread.php?id=<?php echo $id; ?>&action=unflag&type=post"
+                                              class="btn btn-success btn-xs">
+                                              <i class="fa fa-check"></i>
+                                              UnFlag
+                                          </a>
+                                              <?php
+                                          }
+                                          else {
+                                              ?>
+                                          <div class="badge bg-green">
+                                              <i class="fa fa-check"></i>
+                                              Ok
+                                          </div>
+                                          <a href="thread.php?id=<?php echo $id; ?>&action=flag&type=post"
+                                              class="btn btn-warning btn-xs">
+                                              <i class="fa fa-exclamation"></i>
+                                              Flag
+                                          </a>
+                                              <?php
+                                          }
+                                       ?>
+
+                                      <a href="thread.php?id=<?php echo $id; ?>&action=del&type=post"
+                                          class="btn btn-danger btn-xs">
+                                          <i class="fa fa-trash"></i>
+                                          Del
+                                      </a>
+                                      <?php
+                                  }
+                              }
+                          }
+                           ?>
+                           <!-- end of action buttons  -->
+
+
                           <span class="pull-right text-muted">
                               <?php
                               //get the replies.
@@ -277,6 +454,8 @@ include_once 'includes/navigation.php';
                          //loop through the replies and show them
                          while($row = $replies->fetch_assoc())
                          {
+                             $status = $row['flagged'];
+                             $cid = $row['id'];
                              ?>
                          <div class="box box-widget">
                            <div class="box-header with-border">
@@ -320,6 +499,103 @@ include_once 'includes/navigation.php';
 
 
                            <!-- /.box-footer -->
+                           <!-- action buttons  -->
+                           <?php
+                           if(isset($_SESSION['user_id']))
+                           {
+                               if(isset($_SESSION['level']))
+                               {
+                                   if($_SESSION['level'] == Level::MODERATOR)
+                                   {
+                                       ?>
+                                       <div class="box-footer">
+                                           Status:
+
+                                           <?php
+                                               if($status == TRUE)
+                                               {
+                                                   ?>
+                                               <div class="badge bg-red">
+                                                   <i class="fa fa-times"></i>
+                                                   Flagged
+                                               </div>
+                                               <a href="thread.php?idd=<?php echo $id; ?>&cid=<?php echo $cid; ?>&action=unflag&type=comment"
+                                                   class="btn btn-success btn-xs">
+                                                   <i class="fa fa-check"></i>
+                                                   UnFlag
+                                               </a>
+                                                   <?php
+                                               }
+                                               else {
+                                                   ?>
+                                               <div class="badge bg-green">
+                                                   <i class="fa fa-check"></i>
+                                                   Ok
+                                               </div>
+                                               <a href="thread.php?id=<?php echo $id; ?>&cid=<?php echo $cid; ?>&action=flag&type=comment"
+                                                   class="btn btn-warning btn-xs">
+                                                   <i class="fa fa-exclamation"></i>
+                                                   Flag
+                                               </a>
+                                                   <?php
+                                               }
+                                            ?>
+                                       </div>
+
+                                       <?php
+                                   }
+                                   if($_SESSION['level'] == Level::ADMIN)
+                                   {
+                                       ?>
+                                       <div class="box-footer">
+                                           Status:
+
+                                           <?php
+                                               if($status == TRUE)
+                                               {
+                                                   ?>
+                                               <div class="badge bg-red">
+                                                   <i class="fa fa-times"></i>
+                                                   Flagged
+                                               </div>
+                                               <a href="thread.php?id=<?php echo $id; ?>&cid=<?php echo $cid; ?>&action=unflag&type=comment"
+                                                   class="btn btn-success btn-xs">
+                                                   <i class="fa fa-check"></i>
+                                                   UnFlag
+                                               </a>
+                                                   <?php
+                                               }
+                                               else {
+                                                   ?>
+                                               <div class="badge bg-green">
+                                                   <i class="fa fa-check"></i>
+                                                   Ok
+                                               </div>
+                                               <a href="thread.php?id=<?php echo $id; ?>&cid=<?php echo $cid; ?>&action=flag&type=comment"
+                                                   class="btn btn-warning btn-xs">
+                                                   <i class="fa fa-exclamation"></i>
+                                                   Flag
+                                               </a>
+                                                   <?php
+                                               }
+                                            ?>
+
+
+
+
+
+                                           <a href="thread.php?id=<?php echo $id; ?>&cid=<?php echo $cid; ?>&action=del&type=comment"
+                                               class="btn btn-danger btn-xs">
+                                               <i class="fa fa-trash"></i>
+                                               Del
+                                           </a>
+                                       </div>
+                                       <?php
+                                   }
+                               }
+                           }
+                            ?>
+                            <!-- end of action buttons  -->
                          </div>
                              <?php
                          }
@@ -387,6 +663,13 @@ include_once 'includes/toast.php';
 ?>
 
 <!-- custom scripts here -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#like").click(function(){
+            toastr.success("You just Liked this post", '<h4> Success </h4>');
+        });
+    });
+</script>
 
 <?php
 include_once 'includes/end.php';

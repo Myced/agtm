@@ -4,6 +4,7 @@ include_once 'includes/class.dbc.php';
 include_once 'includes/session.php';
 include_once 'includes/functions.php';
 include_once 'includes/day.php';
+include_once 'classes/class.Level.php';
 
 //custom imports
 include_once 'admin/classes/class.User.php';
@@ -15,12 +16,52 @@ $dbc = $db->get_instance();
 //prepare an aray of errors
 $errors = [];
 
+//if the id isset
+if(isset($_GET['id']))
+{
+    //grab the id and the action
+    $id = filter($_GET['id']);
+    $action  = filter($_GET['action']);
+
+    if($action == 'del')
+    {
+        //delete the post
+        $query  = "DELETE FROM `threads` WHERE `id` = '$id'";
+        $result = $dbc->query($query);
+
+        $success = "Post Deleted";
+
+    }
+    elseif ($action == 'flag')
+    {
+        //flage the post
+        $query = "UPDATE `threads` SET `flagged` = '1' WHERE `id` = '$id' ";
+        $result = $dbc->query($query);
+
+        $success = "Post Flagged";
+
+    }
+    elseif ($action == 'unflag') {
+        //flage the post
+        $query = "UPDATE `threads` SET `flagged` = '0' WHERE `id` = '$id' ";
+        $result = $dbc->query($query);
+
+        $success = "Post Unflagged";
+    }
+    else {
+        $warning = "Unknown Action";
+    }
+}
+
 //process the form here
 if(isset($_POST['title']))
 {
     $title = filter($_POST['title']);
     $category = filter($_POST['category']);
     $description = filter($_POST['description']);
+
+    //by default, Flag is false
+    $flagged = FALSE;
 
     //validate the post
     if(empty($title))
@@ -46,11 +87,11 @@ if(isset($_POST['title']))
     {
         //save the thread
         $query = "INSERT INTO `threads` (`category`, `title`, `description`, `user_id`,
-                `day`, `month`, `year`, `date`
+                `day`, `month`, `year`, `date`, `flagged`
         )
 
                 VALUES('$category', '$title', '$description', '$user_id',
-                '$day', '$month', '$year', '$date'
+                '$day', '$month', '$year', '$date', '$flagged'
                 )
         ";
 
@@ -93,7 +134,7 @@ include_once 'includes/navigation.php';
                     <br>
                     <!-- //row for the threads -->
                     <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-md-10">
                             <div class="table-responsive">
                                 <table class="table forum-table">
 
@@ -104,6 +145,21 @@ include_once 'includes/navigation.php';
                                         <th>Views</th>
                                         <th>Author</th>
                                         <th>Replies</th>
+                                        <?php
+                                        if(isset($_SESSION['user_id']))
+                                        {
+                                            if(isset($_SESSION['level']))
+                                            {
+                                                if($_SESSION['level'] > 1)
+                                                {
+                                                    ?>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                                    <?php
+                                                }
+                                            }
+                                        }
+                                         ?>
                                     </tr>
                                     <?php
                                     //get all forum posts
@@ -115,7 +171,7 @@ include_once 'includes/navigation.php';
                                     {
                                         ?>
                                     <tr>
-                                        <td>
+                                        <td colspan="10">
                                             <strong class="text-info">
                                                 No Forum Posts.
                                             </strong>
@@ -126,6 +182,7 @@ include_once 'includes/navigation.php';
                                     else {
                                         while($row = mysqli_fetch_array($result))
                                         {
+                                            $status = $row['flagged'];
                                             ?>
                                         <tr>
                                             <td> <?php echo $row['date']; ?> </td>
@@ -183,6 +240,123 @@ include_once 'includes/navigation.php';
                                                 echo $replies;
                                                  ?>
                                             </td>
+                                            <?php
+                                            if(isset($_SESSION['user_id']))
+                                            {
+                                                if(isset($_SESSION['level']))
+                                                {
+                                                    if($_SESSION['level'] == Level::MODERATOR )
+                                                    {
+                                                        ?>
+                                                    <td>
+                                                        <?php
+
+                                                            if($status == TRUE)
+                                                            {
+                                                                ?>
+                                                            <div class="badge bg-red">
+                                                                <i class="fa fa-times"></i>
+                                                                Flagged
+                                                            </div>
+                                                                <?php
+                                                            }
+                                                            else {
+                                                                ?>
+                                                            <div class="badge bg-green">
+                                                                <i class="fa fa-check"></i>
+                                                                Ok
+                                                            </div>
+                                                                <?php
+                                                            }
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        if($status == TRUE)
+                                                        {
+                                                            ?>
+                                                            <a href="forum.php?id=<?php echo $row['id'] ?>&action=unflag"
+                                                                class="btn btn-success btn-xs">
+                                                                <i class="fa fa-check"></i>
+                                                                Unflag
+                                                            </a>
+                                                            <?php
+                                                        }
+                                                        else {
+                                                            ?>
+                                                            <a href="forum.php?id=<?php echo $row['id'] ?>&action=flag"
+                                                                class="btn btn-warning btn-xs">
+                                                                <i class="fa fa-exclamation"></i>
+                                                                Flag
+                                                            </a>
+                                                            <?php
+                                                        }
+                                                         ?>
+                                                    </td>
+                                                        <?php
+                                                    }
+
+                                                    if($_SESSION['level'] == Level::ADMIN)
+                                                    {
+                                                        ?>
+                                                    <td>
+                                                        <?php
+
+                                                            if($status == TRUE)
+                                                            {
+                                                                ?>
+                                                            <div class="badge bg-red">
+                                                                <i class="fa fa-times"></i>
+                                                                Flagged
+                                                            </div>
+                                                                <?php
+                                                            }
+                                                            else {
+                                                                ?>
+                                                            <div class="badge bg-green">
+                                                                <i class="fa fa-check"></i>
+                                                                Ok
+                                                            </div>
+                                                                <?php
+                                                            }
+                                                        ?>
+                                                    </td>
+                                                    <td>
+
+                                                        <?php
+                                                        if($status == TRUE)
+                                                        {
+                                                            ?>
+                                                            <a href="forum.php?id=<?php echo $row['id'] ?>&action=unflag"
+                                                                class="btn btn-success btn-xs">
+                                                                <i class="fa fa-check"></i>
+                                                                Unflag
+                                                            </a>
+                                                            <?php
+                                                        }
+                                                        else {
+                                                            ?>
+                                                            <a href="forum.php?id=<?php echo $row['id'] ?>&action=flag"
+                                                                class="btn btn-warning btn-xs">
+                                                                <i class="fa fa-exclamation"></i>
+                                                                Flag
+                                                            </a>
+                                                            <?php
+                                                        }
+                                                         ?>
+
+
+                                                        <a href="forum.php?id=<?php echo $row['id'] ?>&action=del"
+                                                            class="btn btn-danger btn-xs">
+                                                            <i class="fa fa-trash"></i>
+                                                            Del
+                                                        </a>
+                                                    </td>
+                                                        <?php
+                                                    }
+                                                }
+                                            }
+                                             ?>
                                         </tr>
                                             <?php
                                         }

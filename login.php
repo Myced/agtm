@@ -94,6 +94,7 @@ if(isset($_POST['username']))
                         $_SESSION['products'] = $row['products'];
                         $_SESSION['newsletter'] = $row['newsletter'];
                         $_SESSION['quotation'] = $row['quotation'];
+                        $_SESSION['forum'] = $row['forum'];
                     }
 
                     header("Location: admin/index.php");

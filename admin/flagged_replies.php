@@ -22,11 +22,36 @@ if(isset($_GET['id']))
 {
     //get the id to delete
     $id = filter($_GET['id']);
+    $action = filter($_GET['action']);
 
-    $query  = "DELETE FROM `replies` WHERE `id` = '$id' ";
-    $result =  $dbc->query($query);
+    if($action == 'del')
+    {
+        //delete the post
+        $query  = "DELETE FROM `replies` WHERE `id` = '$id'";
+        $result = $dbc->query($query);
 
-    $success = "Post Deleted";
+        $success = "Reply Deleted";
+
+    }
+    elseif ($action == 'flag')
+    {
+        //flage the post
+        $query = "UPDATE `replies` SET `flagged` = '1' WHERE `id` = '$id' ";
+        $result = $dbc->query($query);
+
+        $success = "Reply Flagged";
+
+    }
+    elseif ($action == 'unflag') {
+        //flage the post
+        $query = "UPDATE `replies` SET `flagged` = '0' WHERE `id` = '$id' ";
+        $result = $dbc->query($query);
+
+        $success = "Reply Unflagged";
+    }
+    else {
+        $warning = "Unknown Action";
+    }
 }
 
 $flagged = TRUE;
@@ -188,9 +213,33 @@ include_once 'includes/start.php';
                                 </td>
 
                                 <td>
-                                    <a href="<?php echo $_SERVER['PHP_SELF']; ?>?id=<?php echo $row['id']; ?>
+                                    <?php
+                                    if($flagged == TRUE)
+                                    {
+                                        ?>
+                                    <a href="<?php echo $_SERVER['PHP_SELF']; ?>?id=<?php echo $row['id']; ?>&action=unflag
                                         <?php if(isset($_GET['page'])) {echo '&page=' . $_GET['page']; } ?>"
-                                        class="btn btn-danger waves-light waves-effect" >
+                                        class="btn btn-success waves-light waves-effect btn-sm" >
+                                        <i class="fa fa-check"></i>
+                                        Unflag
+                                    </a>
+                                        <?php
+                                    }
+                                    else {
+                                        ?>
+
+                                    <a href="<?php echo $_SERVER['PHP_SELF']; ?>?id=<?php echo $row['id']; ?>&action=flag
+                                        <?php if(isset($_GET['page'])) {echo '&page=' . $_GET['page']; } ?>"
+                                        class="btn btn-warning waves-light waves-effect btn-sm" >
+                                        <i class="fa fa-exclamation"></i>
+                                        Flag
+                                    </a>
+                                        <?php
+                                    }
+                                     ?>
+                                    <a href="<?php echo $_SERVER['PHP_SELF']; ?>?id=<?php echo $row['id']; ?>&action=del
+                                        <?php if(isset($_GET['page'])) {echo '&page=' . $_GET['page']; } ?>"
+                                        class="btn btn-danger waves-light waves-effect btn-sm" >
                                         <i class="fa fa-trash"></i>
                                         Delete
                                     </a>
