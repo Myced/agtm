@@ -196,14 +196,18 @@ if(isset($_POST['quotation']))
                             <div class="row">
                                 <div class="col-md-12">
                                     <h3 class="loi-heading">
-                                        Latest Confirmed LOI for Purchase
+                                        Latest
+                                        <a href="approved_trades.php#sco">
+                                            Confirmed LOI
+                                        </a>
+                                         for Purchase
                                     </h3>
 
                                     <div class="table-responsive">
 
                                         <table class="table table-home vticker">
                                             <?php
-                                            $query = "SELECT * FROM `loi` WHERE `status`  = '$loiStatus' ORDER BY `id` DESC LIMIT 10";
+                                            $query = "SELECT * FROM `loi` WHERE `status`  = '$loiStatus' ORDER BY `id` DESC ";
                                             $result = mysqli_query($dbc, $query)
                                                 or die("Error. Could not get the SCOs");
 
@@ -237,14 +241,20 @@ if(isset($_POST['quotation']))
                             <div class="row">
                                 <div class="col-md-12">
                                     <h3 class="loi-heading">
-                                        Latest Confirmed SCO for sale
+                                        Latest
+
+                                        <a href="approved_trades.php#sco">
+                                            Confirmed SCO
+                                        </a>
+
+                                        for sale
                                     </h3>
 
                                     <div class="table-responsive">
                                         <table class="table table-home vticker">
 
                                             <?php
-                                            $query = "SELECT * FROM `sco` WHERE `status` = '$loiStatus' ORDER BY `id` DESC LIMIT 5";
+                                            $query = "SELECT * FROM `sco` WHERE `status` = '$loiStatus' ORDER BY `id` DESC ";
                                             $result = mysqli_query($dbc, $query)
                                                 or die("Error. Could not get the SCOs");
 
@@ -689,7 +699,7 @@ if(isset($_POST['quotation']))
             		speed: 'slow',
             		interval: 2000,
             		height: 'auto',
-            		visible: 8,
+            		visible: 10,
             		mousePause: 0,
             		controls: {
             			up: '.up',

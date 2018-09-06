@@ -30,7 +30,7 @@ include_once 'includes/navigation.php';
 
 <div class="row">
     <div class="col-md-12">
-        <h2 class="page-header">LOI Details</h2>
+        <h2 class="page-header">SCO Details</h2>
         <div class="bg-white p-20">
             <?php
 
@@ -102,7 +102,7 @@ include_once 'includes/navigation.php';
              <br><br>
              <div class="row">
                  <div class="col-md-12">
-                     <h3 class="page-header">Other LOI Documents</h3>
+                     <h3 class="page-header">Other SCO Documents</h3>
 
                      <div class="row">
                          <?php
@@ -149,7 +149,7 @@ include_once 'includes/navigation.php';
             <div class="pull-left">
                 <a href="<?php echo $_SERVER['PHP_SELF']; ?>?offer=<?php echo $prev; ?>" class="btn btn-info">
                     <i class="fa fa-chevron-left"></i>
-                    Previous  LOI
+                    Previous  SCO
                 </a>
             </div>
             <?php
@@ -174,7 +174,7 @@ include_once 'includes/navigation.php';
             <div class="pull-right">
                 <a href="<?php echo $_SERVER['PHP_SELF']; ?>?offer=<?php echo $next; ?>" class="btn btn-info">
 
-                    Next LOI
+                    Next SCO
                     <i class="fa fa-chevron-right"></i>
                 </a>
             </div>

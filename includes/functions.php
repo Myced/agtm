@@ -244,6 +244,26 @@ function agtm_format($date)
 
 }
 
+function join_date($datein)
+{
+    $array = explode(' ', $datein);
+    $date = $array[0];
+
+
+    $final_date = join_date_format($date);
+
+    return $final_date;
+}
+
+function join_date_format($date)
+{
+    $date_string = strtotime($date);
+    $final_date = date("M. Y", $date_string);
+
+    return $final_date;
+
+}
+
 function get_user_id()
 {
     if(isset($_SESSION['user_id']))
