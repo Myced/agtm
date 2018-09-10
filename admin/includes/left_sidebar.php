@@ -200,8 +200,8 @@
                                     <a href="javascript: void(0);"><i class="fa fa-ticket"></i><span> Product Orders </span> <span class="menu-arrow"></span></a>
                                     <ul class="nav-second-level" aria-expanded="false">
                                         <li><a href="pending_product_orders.php"> Pending Product Orders </a></li>
-                                        <li><a href="confirmed_product_orders.php"> Cofirmed Product Orders </a></li>
-                                        <li><a href="product_order_list.php"> All Product Orders </a></li>
+                                        <!-- <li><a href="confirmed_product_orders.php"> Cofirmed Product Orders </a></li> -->
+                                        <!-- <li><a href="product_order_list.php"> All Product Orders </a></li> -->
                                     </ul>
                                 </li>
                                 <?php
@@ -216,6 +216,7 @@
                                         <li><a href="advert1.php"> Ad Space 1 </a></li>
                                         <li><a href="advert2.php"> Ad Space 2 </a></li>
                                         <li><a href="advert3.php"> Ad Space 3 </a></li>
+                                        <li><a href="advert4.php"> Ad Space 4 </a></li>
                                     </ul>
                                 </li>
                                 <?php

@@ -382,6 +382,24 @@ if(isset($_POST['quotation']))
                                 </div>
                             </div>
                             <!-- end of the row SCO for sale -->
+
+                            <br><br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <?php
+
+                                    $query = "SELECT `link`, `image` FROM `ads` WHERE `id` = '4' ";
+                                    $result = mysqli_query($dbc, $query);
+
+                                    list($link, $image) = mysqli_fetch_array($result);
+                                     ?>
+
+                                     <a href="<?php echo $link; ?>" target="_blank">
+                                         <img src="admin/<?php echo $image; ?>" alt="Advert Image"
+                                         class="ad1" width="100%" height="300px">
+                                     </a>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- //next column for forum post  -->
@@ -505,7 +523,8 @@ if(isset($_POST['quotation']))
                                      ?>
 
                                      <a href="<?php echo $link; ?>" target="_blank">
-                                         <img src="admin/<?php echo $image; ?>" alt="Advert Image" class="ad1">
+                                         <img src="admin/<?php echo $image; ?>" alt="Advert Image"
+                                         class="ad1" width="100%" height="300px">
                                      </a>
                                 </div>
                             </div>
@@ -686,7 +705,8 @@ if(isset($_POST['quotation']))
                                      ?>
 
                                      <a href="<?php echo $link; ?>" target="_blank">
-                                         <img src="admin/<?php echo $image; ?>" alt="Advert Image" class="ad2">
+                                         <img src="admin/<?php echo $image; ?>" alt="Advert Image"
+                                         class="ad2"  width="100%" height="300px">
                                      </a>
                                 </div>
                             </div>
@@ -703,7 +723,8 @@ if(isset($_POST['quotation']))
                                      ?>
 
                                      <a href="<?php echo $link; ?>" target="_blank">
-                                         <img src="admin/<?php echo $image; ?>" alt="Advert Image" class="ad3">
+                                         <img src="admin/<?php echo $image; ?>" alt="Advert Image"
+                                          class="ad3"  width="100%" height="300px">
                                      </a>
                                 </div>
                             </div>
