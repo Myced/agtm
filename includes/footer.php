@@ -28,7 +28,7 @@
 
                 |
 
-                <a href="#">
+                <a href="terms_of_service.php">
                     Term of Service
                 </a>
 
