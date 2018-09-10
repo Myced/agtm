@@ -321,7 +321,7 @@ include_once 'includes/navigation.php';
 
                                     $count = 1;
 
-                                    while ($row = mysqli_fetch_array($sell_offers))
+                                    while ($row = mysqli_fetch_array($buy_offers))
                                     {
                                         ?>
                                     <tr>
