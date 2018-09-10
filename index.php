@@ -70,7 +70,7 @@ if(isset($_POST['quotation']))
              font-size: 0;
              position: absolute;
              bottom: 50px;
-             color: #d5122f;
+             color: #6a8799;
              border: 0;
              background: none;
              z-index: 1;
@@ -108,11 +108,11 @@ if(isset($_POST['quotation']))
                 <div class="bg-white p-20">
                     <div class="row">
                         <div class="col-xs-12 col-md-3">
-                            <form class="" action="index.html" method="post">
+                            <form class="" action="search.php" method="get">
                                  <div class="input-group ">
                                      <input type="text" class="form-control input-orange" name="search" placeholder="Search">
                                        <span class="input-group-btn">
-                                         <button type="button" class="btn btn-orange btn-flat">
+                                         <button type="submit" class="btn btn-orange btn-flat">
                                              <i class="fa fa-search"></i>
                                              Search!
                                          </button>
@@ -280,7 +280,6 @@ if(isset($_POST['quotation']))
                                              ?>
 
 
-
                                         </table>
                                     </div>
                                 </div>
@@ -296,7 +295,7 @@ if(isset($_POST['quotation']))
                             <div class="row">
                                 <div class="col-md-12">
                                     <h3 class="loi-heading">
-                                        Latest Buy Offers
+                                        Latest <a href="all_buy_offers.php">Buy Offers</a>
                                     </h3>
 
                                     <div class="table-responsive">
@@ -343,7 +342,8 @@ if(isset($_POST['quotation']))
                             <div class="row">
                                 <div class="col-md-12">
                                     <h3 class="loi-heading">
-                                        Latest Sell Offers
+                                        Latest
+                                        <a href="all_sell_offers.php">Sell Offers</a>
                                     </h3>
 
                                     <div class="table-responsive">
@@ -391,7 +391,7 @@ if(isset($_POST['quotation']))
 
                                 <div class="col-md-12">
                                     <?php
-                                    $query = "SELECT * FROM `threads` ORDER BY `views` DESC LIMIT 2";
+                                    $query = "SELECT * FROM `threads` ORDER BY `views` DESC LIMIT 4";
                                     $result = $dbc->query($query);
 
                                     while($row = $result->fetch_assoc())
@@ -491,6 +491,25 @@ if(isset($_POST['quotation']))
                                 </div>
                             </div>
                             <!-- end quotation request -->
+
+                            <!-- //ad space -->
+                            <br><br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <?php
+
+                                    $query = "SELECT `link`, `image` FROM `ads` WHERE `id` = '1' ";
+                                    $result = mysqli_query($dbc, $query);
+
+                                    list($link, $image) = mysqli_fetch_array($result);
+                                     ?>
+
+                                     <a href="<?php echo $link; ?>" target="_blank">
+                                         <img src="admin/<?php echo $image; ?>" alt="Advert Image" class="ad1">
+                                     </a>
+                                </div>
+                            </div>
+
                         </div>
                         <!-- end of col-md-3 for quotation and market place -->
 
@@ -658,14 +677,34 @@ if(isset($_POST['quotation']))
                             <br>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <img src="images/1.jpg" alt="Just an image" width="100%" height="250px" >
+                                    <?php
+
+                                    $query = "SELECT `link`, `image` FROM `ads` WHERE `id` = '2' ";
+                                    $result = mysqli_query($dbc, $query);
+
+                                    list($link, $image) = mysqli_fetch_array($result);
+                                     ?>
+
+                                     <a href="<?php echo $link; ?>" target="_blank">
+                                         <img src="admin/<?php echo $image; ?>" alt="Advert Image" class="ad2">
+                                     </a>
                                 </div>
                             </div>
 
                             <br>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <img src="images/2.jpg" alt="Just an image" width="100%" height="250px" >
+                                    <?php
+
+                                    $query = "SELECT `link`, `image` FROM `ads` WHERE `id` = '3' ";
+                                    $result = mysqli_query($dbc, $query);
+
+                                    list($link, $image) = mysqli_fetch_array($result);
+                                     ?>
+
+                                     <a href="<?php echo $link; ?>" target="_blank">
+                                         <img src="admin/<?php echo $image; ?>" alt="Advert Image" class="ad3">
+                                     </a>
                                 </div>
                             </div>
                         </div>
@@ -710,7 +749,7 @@ if(isset($_POST['quotation']))
             	}).data('easyTicker');
 
                 $('.slim').slimScroll({
-            		height: '300px'
+            		height: '500px'
             	});
 
 

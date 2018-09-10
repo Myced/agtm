@@ -9,6 +9,8 @@ class User
     var $level;
     var $tel;
     var $email;
+    public $nationality;
+    public $about_me;
     public $time_added;
 
     //special variables
@@ -37,11 +39,13 @@ class User
             $this->level = $row['level'];
             $this->tel  = $row['tel'];
             $this->email = $row['email'];
+            $this->nationality = $row['nationality'];
+            $this->about_me = $row['about_me'];
             $this->time_added = $row['time_added'];
         }
     }
 
-    function getBuyOderCount()
+    function getBuyOfferCount()
     {
         //initialise the dbc
         $dbc = $this->dbc;
@@ -67,7 +71,56 @@ class User
 
     function getOrdersCount()
     {
-        return 0;
+        $query = "SELECT COUNT(*) AS `total` FROM `product_orders` WHERE `user_id` = '$this->user_id' ";
+        $result = $this->dbc->query($query);
+
+        list($orders) = $result->fetch_array();
+
+        return $orders;
+    }
+
+    function getOrders()
+    {
+        $query = "SELECT * FROM `product_orders` WHERE `user_id` = '$this->user_id' ";
+        $result = $this->dbc->query($query);
+
+        return $result;
+    }
+
+    function getSCOCount()
+    {
+        $query = "SELECT COUNT(*) AS `total` FROM `sco` WHERE `user_id` = '$this->user_id' ";
+        $result = $this->dbc->query($query);
+
+        list($scos) = $result->fetch_array();
+
+        return $scos;
+    }
+
+    function getLOICount()
+    {
+        $query = "SELECT COUNT(*) AS `total` FROM `loi` WHERE `user_id` = '$this->user_id' ";
+        $result = $this->dbc->query($query);
+
+        list($lois) = $result->fetch_array();
+
+        return $lois;
+    }
+
+    function getBuyOffers()
+    {
+        $query = "SELECT *  FROM `buy_offers` WHERE `user_id` = '$this->user_id' ";
+        $result = $this->dbc->query($query);
+
+        return $result;
+    }
+
+    function getSellOffers()
+    {
+        $query = "SELECT *  FROM `sell_offers` WHERE `user_id` = '$this->user_id' ";
+        $result = $this->dbc->query($query);
+
+        return $result;
     }
 }
  ?>

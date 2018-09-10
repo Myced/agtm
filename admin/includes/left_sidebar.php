@@ -182,12 +182,40 @@
                             {
                                 ?>
                                 <li>
-                                    <a href="javascript: void(0);"><i class="fa fa-envelope"></i><span> Manage Forum </span> <span class="menu-arrow"></span></a>
+                                    <a href="javascript: void(0);"><i class="fa fa-comments"></i><span> Manage Forum </span> <span class="menu-arrow"></span></a>
                                     <ul class="nav-second-level" aria-expanded="false">
                                         <li><a href="all_topics.php"> All Forum Topics </a></li>
                                         <li><a href="flagged_topics.php"> Flagged Forum Topics </a></li>
                                         <li><a href="all_replies.php"> All Replies </a></li>
                                         <li><a href="flagged_replies.php"> Flagged Forum Replies </a></li>
+                                    </ul>
+                                </li>
+                                <?php
+                            }
+
+                            if($_SESSION['level'] == Level::ADMIN || $_SESSION['product_orders'])
+                            {
+                                ?>
+                                <li>
+                                    <a href="javascript: void(0);"><i class="fa fa-ticket"></i><span> Product Orders </span> <span class="menu-arrow"></span></a>
+                                    <ul class="nav-second-level" aria-expanded="false">
+                                        <li><a href="pending_product_orders.php"> Pending Product Orders </a></li>
+                                        <li><a href="confirmed_product_orders.php"> Cofirmed Product Orders </a></li>
+                                        <li><a href="product_order_list.php"> All Product Orders </a></li>
+                                    </ul>
+                                </li>
+                                <?php
+                            }
+
+                            if($_SESSION['level'] == Level::ADMIN)
+                            {
+                                ?>
+                                <li>
+                                    <a href="javascript: void(0);"><i class="fa fa-adn"></i><span> Advertisement </span> <span class="menu-arrow"></span></a>
+                                    <ul class="nav-second-level" aria-expanded="false">
+                                        <li><a href="advert1.php"> Ad Space 1 </a></li>
+                                        <li><a href="advert2.php"> Ad Space 2 </a></li>
+                                        <li><a href="advert3.php"> Ad Space 3 </a></li>
                                     </ul>
                                 </li>
                                 <?php
@@ -219,20 +247,6 @@
                                 <?php
                             }
                              ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

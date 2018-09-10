@@ -10,6 +10,116 @@ include_once 'admin/classes/class.Product.php';
 $db = new dbc();
 $dbc = $db->get_instance();
 
+//initialise an error array
+$errors = [];
+
+//function to generate order no
+function gen_order()
+{
+    //database connection;
+    global $dbc;
+
+    $order_no = '';
+
+
+    $query  = "select `id` from `product_orders` ORDER BY `id` DESC LIMIT 1 ";
+    $result = mysqli_query($dbc, $query);
+
+    if(mysqli_num_rows($result) == 0)
+    {
+       $order_no = '000001';
+    }
+    else
+      {
+          list($id) = mysqli_fetch_array($result);
+
+          ++$id;
+
+          $nn = "";
+
+          if($id < 10)
+          {
+            $zeros = '00000';
+          }
+          elseif ($id < 100) {
+            $zeros = '0000';
+          }
+          elseif ($id < 1000) {
+            $zeros = '000';
+          }
+          elseif ($id < 10000) {
+            $zeros = '00';
+          }
+          elseif ($id < 100000) {
+            $zeros = '0';
+          }
+          else {
+              $zeros = '';
+          }
+
+
+          $order_no =  $nn . $zeros . $id;
+      }
+
+      return $order_no;
+}
+
+//get the order details and save them
+if(isset($_POST['quantity']))
+{
+    //grab all form fields
+    $name = filter($_POST['name']);
+    $email = filter($_POST['email']);
+    $quantity = filter($_POST['quantity']);
+    $destination = filter($_POST['destination']);
+    $product = new Product(filter($_GET['id']));
+    $product_name = $product->product_name;
+    $product_id = $product->id;
+    $order_no = gen_order();
+
+
+
+    //now check that the fields are all required
+    if(empty($name))
+    {
+        array_push($errors, "You name is needed. Please fill it");
+    }
+    if(empty($email))
+    {
+        array_push($errors, "Please you must enter your email address");
+    }
+    if(empty($quantity))
+    {
+        array_push($errors, "Please the quantity is needed");
+    }
+    if(empty($destination))
+    {
+        array_push($errors, "Please enter the destination");
+    }
+
+    //check that there were no errors.
+    if(count($errors) == 0)
+    {
+        //then save the order
+        $query = "INSERT INTO `product_orders`
+                    ( `order_code`, `product_id`, `product_name`, `quantity`, `destination`,
+                        `name`, `email`, `user_id`, `time_added`, `date`
+                    )
+
+                    VALUES ( '$order_no', '$product_id', '$product_name', '$quantity', '$destination',
+                        '$name', '$email', '$user_id', NOW(), '$date'
+                    )
+        ";
+
+        $result = mysqli_query($dbc, $query)
+            or die("Error. Could not place order");
+
+        $success = "Your order has been placed";
+
+
+    }
+}
+
 //make sure that the id is selected. Else send them back to the products page
 if(isset($_GET['id']))
 {
@@ -24,14 +134,14 @@ else {
 include_once 'includes/head.php';
 ?>
 <!-- custom styles can go here  -->
-<link rel="stylesheet" href="plugins/slick/slick-theme.css">
+<!-- <link rel="stylesheet" href="plugins/slick/slick-theme.css"> -->
 <style media="screen">
    .slick-prev,
    .slick-next {
     font-size: 0;
     position: absolute;
     bottom: 50px;
-    color: #d5122f;
+    color: #6a8799;
     border: 0;
     background: none;
     z-index: 1;
@@ -174,7 +284,8 @@ include_once 'includes/navigation.php';
 
                              <div class="row">
                                  <div class="col-md-6 col-md-offset-3">
-                                     <a href="#" class="btn btn-info btn-block shadow btn-flat">
+                                     <a href="#order" class="btn btn-info btn-block shadow btn-flat"
+                                        data-toggle="modal" >
                                          Place Order
                                      </a>
 
@@ -272,6 +383,101 @@ include_once 'includes/navigation.php';
         </div>
     </div>
 </div>
+
+<!-- start of modal -->
+
+<div class="modal fade top" id="order" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    data-backdrop="false">
+    <div class="modal-dialog modal-frame" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <form class="form-horizontal" action="" method="post">
+
+            <!-- modal head  -->
+            <div class="modal-header">
+                <h3 class="box-title">Place Order</h3>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body ">
+
+                    <?php
+                    if(!isset($_SESSION['user_id']))
+                    {
+                        ?>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="callout callout-info">
+                                We advise you to sign in before placing your order.
+                                <br>
+                                So that u will be able to track the status of your order
+                            </div>
+                        </div>
+                    </div>
+                        <?php
+                        $name = "";
+                        $email = "";
+                    }
+                    else {
+                        $name = $user->full_name;
+                        $email = $user->email;
+                        ?>
+                        <div class="form-group">
+                            <label for="title" class="control-label col-md-3">Your name:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="name"  class="form-control" required
+                                placeholder="Enter your name" value="<?php echo $name; ?>">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="title" class="control-label col-md-3">Your Email:</label>
+                            <div class="col-md-9">
+                                <input type="email" name="email"  class="form-control" required
+                                placeholder="Email Address" value="<?php echo $email; ?>">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="title" class="control-label col-md-3">Quantity:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="quantity"  class="form-control" required
+                                placeholder="Quantity" value="">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="title" class="control-label col-md-3">Destination:</label>
+                            <div class="col-md-9">
+                                <textarea name="destination" rows="8" class="form-control" placeholder="Enter your Post here" required></textarea>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                     ?>
+
+            </div>
+
+            <!-- //modal footer -->
+            <div class="modal-footer">
+                <button type="submit" name="" value="Post" class="btn btn-primary btn-flat">
+                    <i class="fa fa-send"></i>
+                    Make Order
+                </button>
+                <button type="button" name="button" class="btn btn-danger btn-flat" data-dismiss="modal">
+                    <i class="fa fa-times"></i>
+                    Close
+                </button>
+            </div>
+            </form>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+
+
+<!-- end of modal -->
 
 <?php
 include_once 'includes/footer.php';

@@ -86,7 +86,7 @@ include_once 'includes/navigation.php';
 
                     <div class="row">
                         <div class="col-md-12">
-                            <h3 class="text-info">QUARANTEE OF TRADE</h3>
+                            <h3 class="text-info">GUARANTEE OF TRADE</h3>
 
                             <p>
                                 In this module of business, we guarantee trade in the following ways

@@ -8,6 +8,7 @@ class Status
     const AWARDED = 5;
     const AVAILABLE = 6;
     const CLOSED = 7;
+    const APPROVED = 8;
 
     //create a function to return the item status
     static function get_status($status)

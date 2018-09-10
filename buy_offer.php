@@ -238,7 +238,7 @@ include_once 'includes/navigation.php';
 
                             </label>
                             <div class="col-md-7">
-                                <input type="submit" name="save" class="btn btn-primary" value="Save Sell Offer">
+                                <input type="submit" name="save" class="btn btn-primary" value="Save Buy Offer">
                             </div>
                         </div>
                     </div>

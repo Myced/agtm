@@ -26,80 +26,81 @@ include_once 'includes/navigation.php';
 <div class="row">
     <div class="col-md-12">
         <div class="box box-info">
-            <div class="box-header">
+            <div class="box-header with-border">
               <h3 class="box-title">Buy Offers</h3>
             </div>
             <!-- /.box-header -->
             <br><br>
             <div class="box-body">
-              <table id="example1" class="table table-striped table-hover">
-                <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Product Name</th>
-                  <th>Quantity</th>
-                  <th>Unit </th>
-                  <th>Price</th>
-                </tr>
-                </thead>
-                <tbody>
+              <div class="table-responsive">
+                  <table id="example1" class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Product Name</th>
+                      <th>Quantity</th>
+                      <th>Unit </th>
+                      <th>Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-                <?php
-                //initialise the count variable
-                $count = 1;
-
-                //get the data from the database with a query
-                $query = "SELECT * FROM `buy_offers` WHERE `status` = '$status' ";
-                $result = mysqli_query($dbc, $query)
-                    or die("Error. Cannot get buy offers");
-
-                if(mysqli_num_rows($result) == 0)
-                {
-                    //
-                    ?>
-                <tr>
-                    <td colspan="6">
-                        <strong class="text-primary">No Buy Offers</strong>
-                    </td>
-                </tr>
                     <?php
-                }
-                else {
-                    while ($row = mysqli_fetch_array($result)) {
+                    //initialise the count variable
+                    $count = 1;
+
+                    //get the data from the database with a query
+                    $query = "SELECT * FROM `buy_offers` WHERE `status` = '$status' ";
+                    $result = mysqli_query($dbc, $query)
+                        or die("Error. Cannot get buy offers");
+
+                    if(mysqli_num_rows($result) == 0)
+                    {
+                        //
                         ?>
                     <tr>
-                        <td><?php echo $count++; ?></td>
-                        <td>
-                            <a href="buy_offer_details.php?offer=<?php echo $row['id']; ?>">
-                                <?php echo $row['product_name']; ?>
-                            </a>
-                        </td>
-
-                        <td>
-                            <?php echo $row['quantity']; ?>
-                        </td>
-
-                        <td>
-                            <?php echo $row['packaging']; ?>
-                        </td>
-
-                        <td>
-                            $<?php echo $row['price']; ?>
+                        <td colspan="6">
+                            <strong class="text-primary">No Buy Offers</strong>
                         </td>
                     </tr>
                         <?php
                     }
-                }
+                    else {
+                        while ($row = mysqli_fetch_array($result)) {
+                            ?>
+                        <tr>
+                            <td><?php echo $count++; ?></td>
+                            <td>
+                                <a href="buy_offer_details.php?offer=<?php echo $row['id']; ?>">
+                                    <?php echo $row['product_name']; ?>
+                                </a>
+                            </td>
+
+                            <td>
+                                <?php echo $row['quantity']; ?>
+                            </td>
+
+                            <td>
+                                <?php echo $row['packaging']; ?>
+                            </td>
+
+                            <td>
+                                $<?php echo $row['price']; ?>
+                            </td>
+                        </tr>
+                            <?php
+                        }
+                    }
 
 
-                ?>
-                </tfoot>
-              </table>
+                    ?>
+                    </tfoot>
+                  </table>
+              </div>
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
-          <input type="text" name="ced" value="Tifuh" id="ced" class="form-control">
     </div>
 </div>
 
@@ -109,11 +110,10 @@ include_once 'includes/scripts.php';
 include_once 'includes/toast.php';
 ?>
 <!-- custom scripts here -->
-<script type="text/javascript" src="js/lib/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="js/lib/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="js/lib/dataTables.bootstrap.min.js"></script>
 <script>
-var ced = document.getElementById("ced").value;
-alert(ced);
+
 
   $(function () {
     $('#example1').DataTable()

@@ -38,9 +38,17 @@
                     <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <span class="fa fa-chevron-down pull-right"></span></a>
                           <ul class="dropdown-menu">
+
+                                <li><a href="products.php">Products</a></li>
+                                <li class="divider"></li>
+                                <li><a href="all_sell_offers.php"> Sell Offers </a></li>
+                                <li class="divider"></li>
+                                <li><a href="all_buy_offers.php"> Buy  Offers </a></li>
+                                <li class="divider"></li>
                                 <li><a href="sell_offer.php">Make Sell Offer </a></li>
                                 <li class="divider"></li>
                                 <li><a href="buy_offer.php">Make Buy Offer</a></li>
+
                           </ul>
                     </li>
                     <!-- <li>
@@ -60,12 +68,12 @@
                    $user = new User($usrid);
 
                    $fullname = $user->full_name;
-                   $avatar = $user->photo;
+                   $avatar = 'admin/' . $user->photo;
                    $date = $user->time_added;
 
 
                    //validate the user picture
-                   if(empty($avatar))
+                   if(empty($user->photo))
                    {
                        $avatar = USER_PROFILE;
                    }
@@ -106,7 +114,7 @@
                                <div class="col-xs-4 text-center">
                                  <a href="#">Buy Offers</a>
                                  <br>
-                                 <?php echo $user->getBuyOderCount(); ?>
+                                 <?php echo $user->getBuyOfferCount(); ?>
                                </div>
                                <div class="col-xs-4 text-center">
                                  <a href="#" class="text-bold">Sell Offers</a>
