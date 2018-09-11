@@ -127,6 +127,12 @@ include_once 'includes/navigation.php';
             <form class="form-horizontal" action="" method="post">
                 <div class="row">
                     <div class="col-md-6 col-md-offset-2">
+
+                        <div class="text-center">
+                            <h3>Submit your Selling Request</h3>
+                            <br>
+                        </div>
+
                         <div class="form-group">
                             <label for="product" class="control-label col-md-5">Product Name:</label>
                             <div class="col-md-7">
