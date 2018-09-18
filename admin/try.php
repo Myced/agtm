@@ -1,5 +1,4 @@
 <?php
-//
 //database and other function initialisations
 include_once 'includes/session.php';
 include_once '../classes/class.Level.php';

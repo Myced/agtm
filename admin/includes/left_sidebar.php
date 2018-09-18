@@ -226,6 +226,21 @@
                             {
                                 ?>
                                 <li>
+                                    <a href="javascript: void(0);"><i class="fa fa-indent"></i><span> Product Rows </span> <span class="menu-arrow"></span></a>
+                                    <ul class="nav-second-level" aria-expanded="false">
+                                        <li><a href="add_to_row.php"> Add to Row </a></li>
+                                        <li><a href="row1.php"> Row 1 products </a></li>
+                                        <li><a href="row2.php"> Row 2 products </a></li>
+                                        <li><a href="row3.php"> Row 3 products </a></li>
+                                    </ul>
+                                </li>
+                                <?php
+                            }
+
+                            if($_SESSION['level'] == Level::ADMIN)
+                            {
+                                ?>
+                                <li>
                                     <a href="javascript: void(0);"><i class="fa fa-users"></i><span> Manange Users </span> <span class="menu-arrow"></span></a>
                                     <ul class="nav-second-level" aria-expanded="false">
                                         <li><a href="add_user.php">Add User </a></li>

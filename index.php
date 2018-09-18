@@ -557,13 +557,14 @@ if(isset($_POST['quotation']))
                                     <div class="slider first">
                                         <?php
                                         //perform the query
-                                        $query = " SELECT * FROM `products` ORDER BY `id` DESC LIMIT 6";
+                                        $query = " SELECT * FROM `product_rows` WHERE `row` = '1'
+                                                    ORDER BY `position` ASC LIMIT 8";
                                         $result = mysqli_query($dbc, $query)
                                             or die("Error. Could not get the products");
 
                                         while ($row = mysqli_fetch_array($result)) {
 
-                                            $product = new Product($row['id']);
+                                            $product = new Product($row['product_id']);
                                             $pic = 'admin/' . $product->photo;
                                             $default_pic  = PRODUCT_IMAGE;
                                             ?>
@@ -601,7 +602,8 @@ if(isset($_POST['quotation']))
                                     <div class="slider first">
                                         <?php
                                         //perform the query
-                                        $query = " SELECT * FROM `products` ORDER BY `id` DESC LIMIT 6, 6";
+                                        $query = " SELECT * FROM `product_rows` WHERE `row` = '2'
+                                                    ORDER BY `position` ASC LIMIT 8";
                                         $result = mysqli_query($dbc, $query)
                                             or die("Error. Could not get the products");
 
@@ -645,7 +647,8 @@ if(isset($_POST['quotation']))
                                     <div class="slider first">
                                         <?php
                                         //perform the query
-                                        $query = " SELECT * FROM `products` ORDER BY `id` DESC LIMIT 12, 6";
+                                        $query = " SELECT * FROM `product_rows` WHERE `row` = '3'
+                                                    ORDER BY `position` ASC LIMIT 8";
                                         $result = mysqli_query($dbc, $query)
                                             or die("Error. Could not get the products");
 
