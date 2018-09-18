@@ -197,7 +197,7 @@ if(isset($_POST['quotation']))
                                 <div class="col-md-12">
                                     <h3 class="loi-heading">
                                         Latest
-                                        <a href="approved_trades.php?sco=true">
+                                        <a href="approved_trades.php">
                                             Confirmed LOI
                                         </a>
                                          for Purchase
@@ -243,7 +243,7 @@ if(isset($_POST['quotation']))
                                     <h3 class="loi-heading">
                                         Latest
 
-                                        <a href="approved_trades.php#sco">
+                                        <a href="approved_trades.php?sco=true">
                                             Confirmed SCO
                                         </a>
 

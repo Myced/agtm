@@ -92,7 +92,7 @@ if(isset($_POST['upload']))
 
     //get the file extenstion
     $spl = new SplFileInfo($file_name);
-    $extention = $spl->getExtension();
+    $extention = strtolower($spl->getExtension());
 
     $type = $extention;
 
