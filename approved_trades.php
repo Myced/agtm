@@ -23,19 +23,35 @@ include_once 'includes/navigation.php';
     <div class="col-md-12">
         <h2 class="page-header">Approved Trades</h2>
 
+        <?php
+        //prepare the active link
+        if(isset($_GET['sco']))
+        {
+            $loi = "";
+            $sco = "active";
+        }
+        else {
+            $loi = "active";
+            $sco = "";
+        }
+         ?>
+
         <div class="row">
           <div class="col-md-12">
             <!-- Custom Tabs -->
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
-                <li class="active">
+                <li class="<?php echo $loi; ?>">
                     <a href="#loi" data-toggle="tab"> <strong>Available LOI</strong> </a>
                 </li>
-                <li><a href="#sco" data-toggle="tab"> <strong>Available SCO</strong> </a></li>
+                <li class="<?php echo $sco; ?>">
+                    <a href="#sco" data-toggle="tab"> <strong>Available SCO</strong>
+                    </a>
+                </li>
                 <!-- <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li> -->
               </ul>
               <div class="tab-content">
-                <div class="tab-pane active" id="loi">
+                <div class="tab-pane <?php echo $loi; ?>" id="loi">
                     <h3 class="page-header">Available LOI </h3>
 
                     <div class="row">
@@ -96,7 +112,7 @@ include_once 'includes/navigation.php';
 
 
                 <!-- /.tab-pane -->
-                <div class="tab-pane" id="sco">
+                <div class="tab-pane <?php echo $sco; ?>" id="sco">
                       <h3 class="page-header">Available SCO </h3>
 
                       <div class="row">
