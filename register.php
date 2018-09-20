@@ -180,10 +180,7 @@ if(isset($_POST['register']))
             $info = "Please Check you email box to confirm your registration";
         }
         else {
-            $warning  = "Encountered an Error. Could not send you an email
-            <br>
-            Please try again later
-            ";
+            $error  = "Encountered an Error. Could not send you an email <br> Please try again later ";
         }
 
 

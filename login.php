@@ -57,10 +57,10 @@ if(isset($_POST['username']))
             elseif($status == AccountStatus::UNCONFIRMED)
             {
                 $error = "You have not verified your account yet.";
-                $info = "Please check your email box and verify your
-                        email from the link we sent to you";
+                $info = "Please check your email box and verify your email from the link we sent to you";
             }
             else {
+                echo 'true4';
                 $_SESSION['user_id'] = $user_id;
                 $_SESSION['level'] = $level;
                 $_SESSION['username'] = $user_name;
@@ -108,6 +108,7 @@ if(isset($_POST['username']))
                 else {
                     header("Location: index.php");
                 }
+
               }
         }
         else
@@ -121,6 +122,7 @@ if(isset($_POST['username']))
         $error = "Invalid Username or Password";
     }
 }
+
  ?>
 
 <html>
