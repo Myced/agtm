@@ -569,7 +569,7 @@ if(isset($_POST['quotation']))
                                             $default_pic  = PRODUCT_IMAGE;
                                             ?>
                                             <div class="col-md-5 p-10">
-                                                <a href="product_details.php?id=<?php echo $row['id'] ?>">
+                                                <a href="product_details.php?id=<?php echo $row['product_id'] ?>">
                                                     <div class="row">
                                                         <div class="col-xs-12 col-md-3">
                                                             <img
@@ -614,7 +614,7 @@ if(isset($_POST['quotation']))
                                             $default_pic  = PRODUCT_IMAGE;
                                             ?>
                                             <div class="col-md-5 p-10">
-                                                <a href="product_details.php?id=<?php echo $row['id']; ?>">
+                                                <a href="product_details.php?id=<?php echo $row['product_id']; ?>">
                                                     <div class="row">
                                                         <div class="col-xs-12 col-md-3">
                                                             <img
@@ -660,7 +660,7 @@ if(isset($_POST['quotation']))
                                             ?>
                                             <div class="col-md-5 p-10">
 
-                                                <a href="product_details.php?id=<?php echo $row['id']; ?>">
+                                                <a href="product_details.php?id=<?php echo $row['product_id']; ?>">
                                                     <div class="row">
                                                         <div class="col-xs-12 col-md-3">
                                                             <img

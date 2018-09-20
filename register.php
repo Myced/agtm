@@ -8,6 +8,11 @@ include_once 'includes/day.php';
 include_once 'classes/class.Level.php';
 include_once 'classes/class.AccountStatus.php';
 
+//include email templates
+include_once 'mail_template.php';
+include_once 'mail.php';
+
+
 //initialise the database connection
 $db = new dbc();
 $dbc = $db->get_instance();
@@ -188,6 +193,7 @@ if(isset($_POST['register']))
                 </div>
             </div>
         </div>
+<?php echo 'email here '  . $email; ?>
     </body>
 
     <script src="js/jquery.js"></script>
