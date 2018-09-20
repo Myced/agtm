@@ -97,7 +97,7 @@ if(isset($_POST['register']))
     $token = gen_token();
     //email confirmation url
     $full_name = $name;
-    $confirm_link = "http://www.a-gtm.com/confirm_email.com?token=" . $token;
+    $confirm_link = "http://www.a-gtm.com/confirm_email.php?token=" . $token;
     $to = $email;
 
     //user id
@@ -173,10 +173,20 @@ if(isset($_POST['register']))
 
         //send an email
         include_once 'mail_template.php';
-        mail($to ,$subject ,$mymail, $headers);
 
-        $success = "User Registered Successfully";
-        $info = "Please Check you email box to confirm your registration";
+        if(mail($to ,$subject ,$mymail, $headers))
+        {
+            $success = "User Registered Successfully";
+            $info = "Please Check you email box to confirm your registration";
+        }
+        else {
+            $warning  = "Encountered an Error. Could not send you an email
+            <br>
+            Please try again later
+            ";
+        }
+
+
     }
 }
 

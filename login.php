@@ -54,6 +54,12 @@ if(isset($_POST['username']))
             {
                 $error = "Sorry. Your Account has been suspended. Please contact admin";
             }
+            elseif($status == AccountStatus::UNCONFIRMED)
+            {
+                $error = "You have not verified your account yet.";
+                $info = "Please check your email box and verify your
+                        email from the link we sent to you";
+            }
             else {
                 $_SESSION['user_id'] = $user_id;
                 $_SESSION['level'] = $level;
