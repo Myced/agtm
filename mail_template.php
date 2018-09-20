@@ -1,9 +1,6 @@
 <?php
 
-$full_name = "Joe Biden";
-$confirm_link = "http://href.ced.com";
-
-$email = '
+$mymail = '
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -14,7 +11,7 @@ $email = '
 </head>
 ';
 
-$email .= '
+$mymail .= '
 <body bgcolor="#FFFFFF" style="-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;min-width:100%!important;" >
   <table border="0" cellpadding="10" cellspacing="0"  width="100%" style="background-color:#FFFFFF;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;mso-table-lspace:0;mso-table-rspace:0;border-collapse:collapse!important;" >
     <tr>
@@ -35,7 +32,7 @@ $email .= '
           </tr>
 ';
 
-$email .= '
+$mymail .= '
 <tr>
   <td align="center" valign="top" style="-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;mso-table-lspace:0;mso-table-rspace:0;" >
     <table border="0" cellpadding="0" cellspacing="0" class=
@@ -78,7 +75,7 @@ $email .= '
 ';
 
 
-$email .= '
+$mymail .= '
 <tr>
   <td align="center" valign="top" style="-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;mso-table-lspace:0;mso-table-rspace:0;" >
     <!-- BEGIN BODY // -->

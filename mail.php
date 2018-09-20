@@ -16,23 +16,20 @@ $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
 // the message
 
-// use wordwrap() if lines are longer than 70 characters
-$msg = wordwrap($msg,70);
-
 // send email
-if(mail("tncedric@yahoo.com",$subject ,$msg, $headers))
-{
-    echo 'Gmail Sent';
-}
-else {
-    echo 'failed';
-}
-
-if(mail("tncedric@yahoo.com",$subject ,$msg, $headers))
-{
-    echo 'Yahoo sent';
-}
-else {
-    echo 'failed';
-}
+// if(mail("tncedric@yahoo.com",$subject ,$msg, $headers))
+// {
+//     echo 'Gmail Sent';
+// }
+// else {
+//     echo 'failed';
+// }
+//
+// if(mail("tncedric@yahoo.com",$subject ,$msg, $headers))
+// {
+//     echo 'Yahoo sent';
+// }
+// else {
+//     echo 'failed';
+// }
 ?>

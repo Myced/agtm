@@ -9,7 +9,6 @@ include_once 'classes/class.Level.php';
 include_once 'classes/class.AccountStatus.php';
 
 //include email templates
-include_once 'mail_template.php';
 include_once 'mail.php';
 
 
@@ -19,6 +18,38 @@ $dbc = $db->get_instance();
 
 //include other custom plugins needed
 $errors = [];
+
+//function to generate unique token
+function gen_token()
+{
+    $alpha = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,
+    x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,
+    Z,1,2,3,4,5,6,7,8,9,!,@,#,$,%,&,(,),+";
+
+    //convert this to an array ;
+    $array = explode(',', $alpha);
+
+    $start = 0;
+    $end = count($array) - 1;
+
+    $characters  = '';
+
+    for($i = 0; $i <= 20; $i++)
+    {
+        //get a random letter and show it
+        $index = rand($start, $end);
+        $letter =  $array[$index];
+
+        //add the letter to the string of characters
+        $characters .= $letter;
+    }
+
+    //now encrypt with md5 and return
+    $token = hash("sha256", $characters);
+
+    return $token;
+}
+
 
 //function to create a new user id
 /////FUNCTION TO GENEREATE A USER ID
@@ -61,6 +92,13 @@ if(isset($_POST['register']))
     //GET THE USER AGENT AND IP ADDRESS
     $ip = $_SERVER['REMOTE_ADDR'];
     $user_agent = $_SERVER['HTTP_USER_AGENT'];
+
+    //registration token
+    $token = gen_token();
+    //email confirmation url
+    $full_name = $name;
+    $confirm_link = "http://www.a-gtm.com/confirm_email.com?token=" . $token;
+    $to = $email;
 
     //user id
     $user_id = gen_user_id();
@@ -122,16 +160,23 @@ if(isset($_POST['register']))
     if(!isset($error) && empty($errors))
     {
         //there was no error. so register this user.
-        $query = " INSERT INTO `users` (`user_id`, `full_name`, `tel`, `email`, `level`, `ip_address`, `user_agent`,
+        $query = " INSERT INTO `users` (`user_id`, `full_name`, `tel`, `email`, `level`,
+                `ip_address`, `user_agent`, `token`,
                         `username`, `password`, `day`, `month`, `year`, `date`, `mysql_date`, `time_added`)
 
-                    VALUES('$user_id', '$name', '$tel', '$email', '$level', '$ip', '$user_agent', '$username', '$hash',
+                    VALUES('$user_id', '$name', '$tel', '$email', '$level',
+                        '$ip', '$user_agent', '$token', '$username', '$hash',
                         '$day', '$month', '$year', '$date', '$mysql_date', NOW() )";
 
         $result = mysqli_query($dbc, $query)
                or die("Error. Could not complete registration");
 
+        //send an email
+        include_once 'mail_template.php';
+        mail($to ,$subject ,$mymail, $headers);
+
         $success = "User Registered Successfully";
+        $info = "Please Check you email box to confirm your registration";
     }
 }
 
@@ -193,7 +238,7 @@ if(isset($_POST['register']))
                 </div>
             </div>
         </div>
-<?php echo 'email here '  . $email; ?>
+
     </body>
 
     <script src="js/jquery.js"></script>
