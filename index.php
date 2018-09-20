@@ -609,7 +609,7 @@ if(isset($_POST['quotation']))
 
                                         while ($row = mysqli_fetch_array($result)) {
 
-                                            $product = new Product($row['id']);
+                                            $product = new Product($row['product_id']);
                                             $pic = 'admin/' . $product->photo;
                                             $default_pic  = PRODUCT_IMAGE;
                                             ?>
@@ -654,7 +654,7 @@ if(isset($_POST['quotation']))
 
                                         while ($row = mysqli_fetch_array($result)) {
 
-                                            $product = new Product($row['id']);
+                                            $product = new Product($row['product_id']);
                                             $pic = 'admin/' . $product->photo;
                                             $default_pic  = PRODUCT_IMAGE;
                                             ?>
