@@ -48,12 +48,17 @@ if(isset($_POST['quotation']))
 
 
  ?>
-
  <!DOCTYPE html>
  <html>
      <head>
-         <meta charset="utf-8">
-         <title>AGTM - Home</title>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="author" content="AGTM Team" />
+        <meta content="Online Trading Site, APEX GLOBAL TRADING AND MARKETTING" name="description" />
+        <meta name="keywords" content="AGTM, APEX GLOBAL TRADING AND MARKETING, a-gtm.com, www.a-gtm.com" />
+
+        <title>AGTM - Home</title>
 
          <link rel="shortcut icon" href="admin/assets/images/favicon.ico">
 
@@ -407,28 +412,34 @@ if(isset($_POST['quotation']))
                             <div class="row">
                                 <h3 class="page-header">Forum Updates</h3>
 
-                                <div class="col-md-12">
-                                    <?php
-                                    $query = "SELECT * FROM `threads` ORDER BY `views` DESC LIMIT 4";
-                                    $result = $dbc->query($query);
+                                <div class="col-md-12 vtick">
 
-                                    while($row = $result->fetch_assoc())
-                                    {
-                                        ?>
-                                    <div class="callout">
-                                        <h5> <strong><?php echo $row['title']; ?></strong> </h5>
-                                        <p>
-                                            <?php
-                                            $text = nl2br(substr($row['description'], 0, 60));
-
-                                            echo $text;
-                                             ?> ...
-                                        </p>
-                                    </div>
+                                    <div class="">
                                         <?php
-                                    }
+                                        $query = "SELECT * FROM `threads` ORDER BY `views` DESC LIMIT 8";
+                                        $result = $dbc->query($query);
 
-                                     ?>
+                                        while($row = $result->fetch_assoc())
+                                        {
+                                            ?>
+                                        <a href="thread.php?id=<?php echo $row['id']; ?>">
+                                            <div class="callout text-black">
+                                                <h5> <strong><?php echo $row['title']; ?></strong> </h5>
+                                                <p>
+                                                    <?php
+                                                    $text = nl2br(substr($row['description'], 0, 60));
+
+                                                    echo $text;
+                                                     ?> ...
+                                                </p>
+                                            </div>
+                                        </a>
+                                            <?php
+                                        }
+
+                                         ?>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -771,6 +782,22 @@ if(isset($_POST['quotation']))
             			stopText: 'Stop !!!'
             		}
             	}).data('easyTicker');
+
+                var dd = $('.vtick').easyTicker({
+                   direction: 'up',
+                   easing: 'easeInOutBack',
+                   speed: 'slow',
+                   interval: 4000,
+                   height: 'auto',
+                   visible: 5,
+                   mousePause: 0,
+                   controls: {
+                       up: '.up',
+                       down: '.down',
+                       toggle: '.toggle',
+                       stopText: 'Stop !!!'
+                   }
+               }).data('easyTicker');
 
                 $('.slim').slimScroll({
             		height: '500px'
