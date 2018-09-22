@@ -113,7 +113,7 @@ if(isset($_POST['update']))
         //now if the photo had no errors. then update
         if(count($errors) == 0)
         {
-            echo $query = "UPDATE `users` SET
+            $query = "UPDATE `users` SET
                             `full_name` = '$full_name', `tel` = '$tel',
                             `email` = '$email', `nationality` = '$nationality',
                             `about_me` = '$about_me', `avatar` = '$user_photo'
